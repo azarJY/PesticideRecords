@@ -1,24 +1,43 @@
-# README
+# 農薬記録サイト
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
 
-Things you may want to cover:
+### サイトテーマ
+棟や区画ごとで管理できる農薬使用記録アプリです
 
-* Ruby version
+### テーマの選定理由・興味
+現職にて夏イチゴの栽培に携わっているのですが、農薬の使用記録は紙で管理していました。
+記録が増えると煩雑になるだけでなく、各区画ごとの薬剤使用回数など調べる際不便に感じることが多かったので
+これらを一覧で見やすくできるサイトがあれば便利だと考え、本テーマにしました。
+JAなどから農薬の管理アプリなどは出ているのですが、各棟の使用記録やどのページでもすぐに希釈量が計算できるといったものは探した限りでは見つからなかったため
+そういった機能を盛り込むことで他サイトとの差別化を図っています
 
-* System dependencies
+### ターゲットユーザ
+・農場の管理者や、家庭菜園など農産物の生産に携わる人
 
-* Configuration
+### 主な使用シーン
+・農薬使用の際の記録
+・過去の記録や使用量を調べて棚卸の時に役立てる
+・農薬希釈量の計算・確認
 
-* Database creation
 
-* Database initialization
+### 使い方
+・まず管理者アカウントを作成します。
+・次に各ハウスや露地の場合区画などを管理しやすいよう決め登録をします
+・次に使用予定の農薬を登録します。
+・ここまできたらページ左側の希釈量計算器を活用していただき農薬使用記録表に必要事項を記入していただきます
+・成功しましたら
+・過去の農薬使用記録が一覧で閲覧できますので、各棟使用回数を確認したり、使用量を把握して在庫棚卸をスムーズにするなどご活用ください
 
-* How to run the test suite
+### 設計書
 
-* Services (job queues, cache servers, search engines, etc.)
+後ほど作成予定
 
-* Deployment instructions
+### 開発環境
+・ OS：Linux(CentOS)
+・ 言語：HTML,CSS,JavaScript,Ruby,SQL
+・ フレームワーク：Ruby on Rails
+・ JSライブラリ：jQuery
+・ IDE：Cloud9
 
-* ...
+### 使用素材
