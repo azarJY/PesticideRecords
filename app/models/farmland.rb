@@ -1,0 +1,2 @@
+class Farmland < ApplicationRecord
+end
