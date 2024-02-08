@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_02_07_131600) do
+ActiveRecord::Schema.define(version: 2024_02_07_154043) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -38,6 +38,71 @@ ActiveRecord::Schema.define(version: 2024_02_07_131600) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "farmers", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.string "last_name", null: false
+    t.string "first_name", null: false
+    t.string "last_name_kana", null: false
+    t.string "first_name_kana", null: false
+    t.string "farm_name", null: false
+    t.string "crop", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_farmers_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_farmers_on_reset_password_token", unique: true
+  end
+
+  create_table "farmlands", force: :cascade do |t|
+    t.integer "farmer_id", null: false
+    t.string "farmland", null: false
+    t.string "area", null: false
+    t.text "overview", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "pesticides", force: :cascade do |t|
+    t.integer "farmer_id", null: false
+    t.string "name", null: false
+    t.string "code", null: false
+    t.string "subject", null: false
+    t.string "use_method", null: false
+    t.string "magnification", null: false
+    t.integer "usable_number", null: false
+    t.text "ur", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "records", force: :cascade do |t|
+    t.integer "farmer_id", null: false
+    t.integer "farmland_id", null: false
+    t.integer "pesticide_id", null: false
+    t.date "day", null: false
+    t.string "name", null: false
+    t.string "subject", null: false
+    t.string "code", null: false
+    t.string "farmland", null: false
+    t.string "amount", null: false
+    t.string "water", null: false
+    t.string "user", null: false
+    t.string "confimer", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "seasons", force: :cascade do |t|
+    t.integer "farmer_id", null: false
+    t.date "start_date"
+    t.date "end_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
