@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'farmers/show'
+  get 'farmers/edit'
+  get 'farmers/confirm'
+  get 'farmers/unsubscrided'
   authenticated :farmer do
     # ログインしているユーザにしか表示できないようにしている
     resources :farmlands, only: [:index, :new, :create, :show, :destroy]
