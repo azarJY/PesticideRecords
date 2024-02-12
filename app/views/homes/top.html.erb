@@ -1,2 +1,8 @@
-<h1>Homes#top</h1>
-<p>Find me in app/views/homes/top.html.erb</p>
+<h1>「農効」へようこそ！</h1>
+<p>本アプリは農業を効率化するため、農薬使用記録の管理を行うことができます。</p>
+<p>本アプリを通して、皆様の農業活動の一助を担えれば幸いです。</p>
+<p>ゲストログインしていただけるとどんな機能があるのかを実際に見ることができます。</p>
+
+<p>新規登録及びログインはヘッダーからアクセスしてくださいませ。</p>
+
+<%= link_to "→ゲストログイン", farmer_session_path, method: :post, params: { farmer: { email: "noukou@gmail.com", password: "156464" } } %>

@@ -1,0 +1,2 @@
+module Farmer::RecordsHelper
+end

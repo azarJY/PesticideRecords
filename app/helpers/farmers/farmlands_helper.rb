@@ -1,0 +1,2 @@
+module Farmers::FarmlandsHelper
+end

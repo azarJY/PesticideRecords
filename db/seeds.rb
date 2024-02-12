@@ -12,9 +12,6 @@ guest_user = Farmer.new(
 )
 guest_user.save!
 
-# 以下ゲストログイン用リンク
-# <%= link_to "ゲストログイン", new_user_session_path, method: :post, params: { user: { email: "noukou@gmail.com", password: "156464" } } %>
-
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 #

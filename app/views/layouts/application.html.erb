@@ -1,17 +1,83 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>PesticideRecords</title>
+    <title>Noukou</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    
-    <script src="https://kit.fontawesome.com/1f515556ad.js" crossorigin="anonymous"></script>
+
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
+  
   <body>
-    <%= yield %>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-info">
+        <div class="container">
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+             
+            <li>
+              
+            </li>
+            <li>
+              
+            </li>
+            <li>
+              
+            </li>
+            <li>
+              
+            </li>
+                     
+          <% elsif customer_signed_in? %>
+          <p class="pr-5 text-light">ようこそ！</p>
+            <li>
+              
+            </li>
+            <li>
+              
+            </li>
+            <li>
+              
+            </li>
+            <li>
+              
+            </li>
+          <% else %>
+            <li>
+              
+            </li>
+            <li>
+              
+            </li>
+            <li>
+              
+            </li>
+            <li>
+              
+            </li>
+                      
+        <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div>
+        <%= flash[:notice] %>
+      </div>
+      <%= yield %>
+    </main>
+    <footer>
+      <div class="container mt-5">
+        <div class="row">
+          <div class="mx-auto">
+            <p>Noukou Cumpany  noukou@maill.com</p>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
