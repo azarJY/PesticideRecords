@@ -9,7 +9,8 @@ Rails.application.routes.draw do
   
   namespace :farmer do
 
-    resource :current_farmer, only: [:show, :edit, :update, :confirm, :destroy]
+    resource :current_farmer, only: [:show, :edit, :update, :destroy]
+    get "current_farmer/confirm"
     resources :farmlands, only: [:index, :new, :create, :show, :destroy]
     resources :pesticides, only: [:index, :new, :create, :show, :destroy]
     resources :records, only: [:index, :new, :create, :show, :edit, :update, :destroy]

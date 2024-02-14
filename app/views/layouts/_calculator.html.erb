@@ -1,0 +1,22 @@
+<script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <input type="number" id="num1" class="num">
+    <input type="number" id="num2" class="num">
+    <div id="result">0</div>
+    <script>
+      $('.num').on('keyup', () => {
+        const num1 = parseInt($('#num1').val())
+        const num2 = parseInt($('#num2').val())
+        const result = $('#result')
+        const sum = num1 + num2
+        if (isNaN(sum)) {
+          result.text(0)
+        } else {
+          result.text(sum)
+        }
+      })
+    </script>

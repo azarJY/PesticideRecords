@@ -1,2 +1,36 @@
-<h1>Farmer::CurrentFarmers#show</h1>
-<p>Find me in app/views/farmer/current_farmers/show.html.erb</p>
+<div class="container pt-5">
+  <h1>マイページ</h1>
+  <div class="row pt-3">
+    <%= link_to "編集する", edit_farmer_current_farmer_path, class:"btn btn-success" %>
+  </div>
+  <div class="row pt-3">
+    <table class="table col-6">
+      <tr>
+        <th class="table-dark">農場名</th>
+        <td>
+          <%= @farmer.farm_name %>
+        </td>
+      </tr>
+      <tr>
+        <th class="table-dark">名前</th>
+        <td>
+          <%= @farmer.last_name %>  <%= @farmer.first_name %>
+        </td>
+      </tr>
+      <tr>
+        <th class="table-dark">名前カナ</th>
+        <td>
+          <%= @farmer.last_name_kana %>  <%= @farmer.first_name_kana %>
+        </td>
+      </tr>
+      <tr>
+        <th class="table-dark">栽培作物</th>
+        <td><%= @farmer.crop %></td>
+      </tr>
+      <tr>
+        <th class="table-dark">メールアドレス</th>
+        <td><%= @farmer.email %></td>
+      </tr>
+      </table>
+  </div>
+</div>

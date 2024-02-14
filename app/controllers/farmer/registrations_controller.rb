@@ -37,6 +37,10 @@ class Farmers::RegistrationsController < Devise::RegistrationsController
   # def cancel
   #   super
   # end
+  
+  def after_sign_up_path_for(resource)
+    farmer_current_farmer_path
+  end
 
   # protected
 

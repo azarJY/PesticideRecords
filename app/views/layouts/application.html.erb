@@ -14,51 +14,35 @@
     <header>
       <nav class="navbar navbar-expand-lg navbar-dark bg-info">
         <div class="container">
+          <%= link_to "農効", root_path, class:"navbar-brand" %>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
-             
+          <% if farmer_signed_in? %>
+             <p class="pr-5 text-light"><%= current_farmer.farm_name %>  様</p>
             <li>
-              
+              <%= link_to "栽培区画一覧", farmer_farmlands_path, class:'nav-link text-light' %>
             </li>
             <li>
-              
+              <%= link_to "農薬一覧", farmer_pesticides_path, class:'nav-link text-light' %>
             </li>
             <li>
-              
+              <%= link_to "使用記録一覧", farmer_records_path, class:'nav-link text-light' %>
             </li>
             <li>
-              
+              <%= link_to "マイページ", farmer_current_farmer_path(current_farmer), class:'nav-link text-light' %>
+            </li>
+            <li>
+              <%= link_to "ログアウト", farmer_current_farmer_path, method: :delete, class:'nav-link text-light' %>
             </li>
                      
-          <% elsif customer_signed_in? %>
-          <p class="pr-5 text-light">ようこそ！</p>
-            <li>
-              
-            </li>
-            <li>
-              
-            </li>
-            <li>
-              
-            </li>
-            <li>
-              
-            </li>
           <% else %>
             <li>
-              
+              <%= link_to "新規登録", new_farmer_registration_path, class:'nav-link text-light' %>
             </li>
             <li>
-              
+              <%= link_to "ログイン", new_farmer_session_path, class:'nav-link text-light' %>
             </li>
-            <li>
-              
-            </li>
-            <li>
-              
-            </li>
-                      
-        <% end %>
+          <% end %>
             </ul>
           </div>
         </div>

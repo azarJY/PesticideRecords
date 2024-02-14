@@ -1,17 +1,28 @@
 class Farmer::CurrentFarmersController < ApplicationController
+  before_action :authenticate_farmer!
+  
   def show
+    @farmer = Farmer.find(current_farmer.id)
   end
 
   def edit
+    @farmer = Farmer.find(current_farmer.id)
   end
   
   def update
+    @farmer = Farmer.find(current_farmer.id)
+    @farmer.update(farmer_params)
+    redirect_to public_current_customer_path
   end
-
+  
   def confirm
+    @farmer = Farmer.find(current_farmer.id)
   end
 
   def destroy
+    @farmer = Farmer.find(current_farmer.id)
+    farmer.destroy_all
+    redirect_to root_path
   end
   
   private
