@@ -12,7 +12,7 @@ class Farmer::CurrentFarmersController < ApplicationController
   def update
     @farmer = Farmer.find(current_farmer.id)
     @farmer.update(farmer_params)
-    redirect_to public_current_customer_path
+    redirect_to farmer_current_farmer_path
   end
   
   def confirm
@@ -21,7 +21,7 @@ class Farmer::CurrentFarmersController < ApplicationController
 
   def destroy
     @farmer = Farmer.find(current_farmer.id)
-    farmer.destroy_all
+    @farmer.destroy
     redirect_to root_path
   end
   

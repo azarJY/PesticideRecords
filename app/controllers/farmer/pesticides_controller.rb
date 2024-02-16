@@ -19,7 +19,6 @@ class Farmer::PesticidesController < ApplicationController
   
   def destroy
     @farmer = Farmer.find(current_farmer.id)
-    
   end
   
   private

@@ -1,2 +1,25 @@
-<h1>Farmer::Farmlands#new</h1>
-<p>Find me in app/views/farmer/farmlands/new.html.erb</p>
+<div class="container">
+  <%= render 'calculator', farmer: @farmer %>
+  <div class="row">
+    <div class="col">
+      <h2>栽培区画新規登録</h2>
+      <%= form_with model: @farmland, url: farmer_farmlands_path do |f| %>
+        <table class="table">
+          <tr>
+            <th scope="col">区画名</th>
+            <td><%= f.file_field :farmland %></td>
+          </tr>
+          <tr>
+            <th scope="col">栽培面積</th>
+            <td><%= f.text_field :area %></td>
+          </tr>
+          <tr>
+            <th scope="col">概要</th>
+            <td><%= f.text_area :overview %></td>
+          </tr>
+        </table>
+        <%= f.submit '新規登録', class: "btn btn-success" %>
+      <% end %>
+    </div>
+  </div>
+</div>

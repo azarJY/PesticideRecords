@@ -1,2 +1,47 @@
-<h1>Farmer::Farmlands#show</h1>
-<p>Find me in app/views/farmer/farmlands/show.html.erb</p>
+<div class="container">
+  <%= render 'calculator', farmer: @farmer %>
+  <div class="row">
+    <div class="col-4">
+      <h2><%= @farmland.farmland %> 詳細</h2>
+    </div>
+    <div class="col-2">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>栽培面積</th>
+            <th>概要</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= @farmland.area %></td>
+            <td><%= @farmland.overview %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-6">
+      <%= @farmland.farmland %>農薬使用記録一覧
+      <table class="table">
+        <thead>
+          <tr>
+            <th>日付</th>
+            <th>使用農薬</th>
+            <th>使用量</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @farmland.@records.each do |record| %>
+          <tr>
+            <td><%= record.day %></td>
+            <%= link_to farmer_record_path(@record.id) do %>
+              <td><%= record.name %></td>
+            <% end %>
+            <td><%= record.amount %></td>
+          </tr>
+          <% end %>
+        </tbody>
+        <%= link_to '栽培区画削除', farmer_farmland_path(@farmland.id), method: :delete, "data-confirm" => "本当に削除しますか？",  class: "btn btn-danger" %>
+    </div>
+  </div>
+</div>

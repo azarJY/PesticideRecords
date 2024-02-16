@@ -15,7 +15,7 @@
       <tr><th scope="col">メールアドレス</th><td><%= f.text_field :email %></td></tr>
     </table>
 <%= f.submit "編集内容を保存", class:"btn btn-success" %>
-<%= link_to "退会処理はこちらから", farmer_current_farmer_confirm_path, class: 'btn btn-danger'%>
+<%= link_to "退会処理はこちらから", current_farmer_confirm_path, class: 'btn btn-danger'%>
 <% end %>
   </div>
 </div>
