@@ -13,6 +13,15 @@ import "popper.js";
 import "bootstrap";
 import "../stylesheets/application"; 
 
+// カレンダー形式用java設定
+
+document.addEventListener('DOMContentLoaded', function() {
+  flatpickr('.flatpickr', {
+    dateFormat: 'Y-m-d',
+    locale: 'ja',
+  });
+});
+
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
