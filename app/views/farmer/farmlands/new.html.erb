@@ -18,7 +18,7 @@
             <td><%= f.text_area :overview %></td>
           </tr>
         </table>
-        <%= f.submit '新規登録', class: "btn btn-success" %>
+        <%= f.submit '新規登録', "data-confirm" => "登録したデータは編集できません！作成してよろしいですか？？",  class: "btn btn-success" %>
       <% end %>
     </div>
   </div>

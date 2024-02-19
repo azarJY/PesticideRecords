@@ -1,8 +1,37 @@
 <div class="container">
   <%= render 'calculator', farmer: @farmer %>
-  <div class="row justify-content-center">
+  <div class="row">
     <div class="col">
-      <h1>農薬新規登録</h1>
+      <h2>使用農薬新規登録</h2>
+      <%= form_with model: @pesticide, url: farmer_pesticides_path do |f| %>
+        <table class="table">
+          <tr>
+            <th scope="col">農薬名</th>
+            <td><%= f.file_field :name %></td>
+          </tr>
+          <tr>
+            <th scope="col">RACコード</th>
+            <td><%= f.text_field :code %></td>
+          </tr>
+          <tr>
+            <th scope="col">適用病害虫</th>
+            <td><%= f.text_area :subject %></td>
+          </tr>
+          <tr>
+            <th scope="col">使用方法</th>
+            <td><%= f.file_field :use_method %></td>
+          </tr>
+          <tr>
+            <th scope="col">希釈量</th>
+            <td><%= f.file_field :magnification %></td>
+          </tr>
+          <tr>
+            <th scope="col">使用可能回数</th>
+            <td><%= f.file_field :usable_number %></td>
+          </tr>
+        </table>
+        <%= f.submit '新規登録', "data-confirm" => "登録したデータは編集できません！作成してよろしいですか？？",   class: "btn btn-success" %>
+      <% end %>
     </div>
   </div>
 </div>

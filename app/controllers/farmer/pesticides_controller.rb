@@ -4,7 +4,8 @@ class Farmer::PesticidesController < ApplicationController
   def index
     @farmer = Farmer.find(current_farmer.id)
     @pesticides = Pesticide.all
-    @record = Record.find(record.id)
+    pesticide_ids = @pesticides.pluck(:id)
+    @records = Record.where(pesticide_id: pesticide_ids)
   end
 
   def new

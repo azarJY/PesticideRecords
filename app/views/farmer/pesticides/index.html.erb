@@ -2,7 +2,37 @@
   <%= render 'calculator', farmer: @farmer %>
   <div class="row justify-content-center">
     <div class="col">
-      <h1>登録済農薬</h1>
+      <h1>登録済農薬一覧</h1>
+      <h2 class="text-info"><%= link_to("農薬新規登録", new_farmer_pesticide_path), class: "btn btn-success" %></h2>
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">農薬</th>
+            <th scope="col">RAC</th>
+            <th scope="col">適用病害虫</th>
+            <th scope="col">直近薬散記録(1件)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @pesticides.each do |pesticide| %>
+            <tr>
+              <td>
+                <%= link_to farmer_pesticide_path(pesticide.id) do %>
+                  <%= pesticide.name %>
+                <% end %>
+              </td>
+              <td><%= pesticide.code %></td>
+              <td><%= pesticide.subject %></td>
+              <td>
+                <%= link_to farmer_record_path(@record.id) do %>
+                  <%= pesticide.record.day %> <%= pesticide.record.farmland %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+        <tfooter></tfooter>
+      </table>
     </div>
   </div>
 </div>

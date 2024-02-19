@@ -4,5 +4,65 @@
     <div class="col">
       <h1><%= @pesticide.name %> 詳細</h1>
     </div>
+    <div class="col-2">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>RAC</th>
+            <th>適用病害虫</th>
+            <th>使用方法</th>
+            <th>希釈倍率</th>
+            <th>使用可能回数</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= @pesticide.code %></td>
+            <td><%= @pesticide.subject %></td>
+            <td><%= @pesticide.use_method %></td>
+            <td><%= @pesticide.magnification %></td>
+            <td><%= @pesticide.usable_number %></td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <h1>使用可能回数一覧</h1><h2>使用可能回数<%= @pesticide.usable_number %></h2>
+      <%= link_to "シーズン時期設定", farmer_new_season_path, class: "btn btn-primary" %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>栽培区画</th>
+            <th>使用回数</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= @farmland.name %></td>
+            <td><%= @record_count %></td>
+          </tr>
+        </tbody>
+        
+      </table>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>日付</th>
+            <th>栽培区画</th>
+            <th>使用量</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @pesticides.@records.each do |record| %>
+          <tr>
+            <td><%= record.day %></td>
+            <%= link_to farmer_record_path(@record.id) do %>
+              <td><%= record.farmland %></td>
+            <% end %>
+            <td><%= record.amount %></td>
+          </tr>
+          <% end %>
+        </tbody>
+        <%= link_to '栽培区画削除', farmer_pesticide_path(@pesticide.id), method: :delete, "data-confirm" => "本当に削除しますか？",  class: "btn btn-danger" %>
+      </table>
   </div>
 </div>
