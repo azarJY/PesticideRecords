@@ -1,2 +1,23 @@
-<h1>Farmer::Records#show</h1>
-<p>Find me in app/views/farmer/records/show.html.erb</p>
+<div class="container pt-5">
+  <%= render 'calculator', farmer: @farmer %>
+  <div class="row pt-3">
+    <div class="col-2"></div>
+    <div class="col-2"><h1>使用記録詳細</h1></div>
+    <div class="col-8"></div>
+  </div>
+  
+  <div class="row pt-3">
+    <table class="table">
+      <tr><th>日付</th><td><%= @record.day %></td></tr>
+      <tr><th>使用農薬</th><td><%= @record.name %></td></tr>
+      <tr><th>適用病害虫</th><td><%= @record.subject %></td></tr>
+      <tr><th>散布区画</th><td><%= @record.farmland %></td></tr>
+      <tr><th>RACコード</th><td><%= @record.code %></td></tr>
+      <tr><th>使用量</th><td><%= @record.amount %></td></tr>
+      <tr><th>原水量</th><td><%= @record.water %></td></tr>
+      <tr><th>散布車</th><td><%= @record.user %></td></tr>
+      <tr><th>確認者</th><td><%= @record.confimer %></td></tr>
+    </table>
+  </div>
+  <div class="row pt-3"><%= link_to '使用記録編集' edit_farmer_record_path, class: "btn btn-primary" %></div>
+</div>

@@ -1,0 +1,32 @@
+<div class="container">
+  <%= render 'calculator', farmer: @farmer %>
+  <div class="row justify-content-center">
+    <div class="col">
+      <h1>農薬使用記録一覧</h1>
+      <h2 class="text-info"><%= link_to("使用記録新規作成", new_farmer_record_path), class: "btn btn-success" %></h2>
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">日付</th>
+            <th scope="col">使用農薬</th>
+            <th scope="col">散布区画</th>
+            <th scope="col">使用量</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @records.each do |record| %>
+            <%= link_to farmer_record_path(record.id) do %>
+              <tr>
+                <td><%= record.day %></td>
+                <td><%= record.name %></td>
+                <td><%= record.farmland %></td>
+                <td><%= record.amount %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+        <tfooter></tfooter>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,2 +1,51 @@
-<h1>Farmer::Records#edit</h1>
-<p>Find me in app/views/farmer/records/edit.html.erb</p>
+<div class="container">
+  <%= render 'calculator', farmer: @farmer %>
+  <div class="row">
+    <div class="col">
+      <h2>使用記録編集</h2>
+      <%= form_with model: @record, url: farmer_record_path, method: :patch do |f| %>
+        <table class="table">
+          <tr>
+            <th scope="col">日付</th>
+            <td>
+              <%= form.text_field :day, class: 'form-control flatpickr', data: {enable_time: false} %>
+            </td>
+          </tr>
+          <tr>
+            <th scope="col">農薬名</th>
+            <td>
+              <%= f.select :pesticide_id, options_from_collection_for_select(@farmer.pesticide, :id, :name) %>
+            </td>
+          </tr>
+          <tr>
+            <th scope="col">散布区画</th>
+            <td>
+              <%= f.select :farmland_id, options_from_collection_for_select(@farmer.farmland, :id, :farmland) %>
+            </td>
+          </tr>
+          <tr>
+            <th scope="col">使用量(単位も入力)</th>
+            <td><%= f.text_field :anount %></td>
+          </tr>
+          <tr>
+            <th scope="col">原水(単位も入力)</th>
+            <td><%= f.text_field :water %></td>
+          </tr>
+          <tr>
+            <th scope="col">散布者</th>
+            <td><%= f.text_field :user %></td>
+          </tr>
+          <tr>
+            <th scope="col">確認者</th>
+            <td><%= f.text_field :confimer %></td>
+          </tr>
+          
+        </table>
+        <%= f.submit '変更を保存', class: "btn btn-success" %>
+      <% end %>
+    </div>
+    <div class="col">
+      <div class="d-flex justify-content-center"><%= link_to '削除' farmer_record_path(@record.id) method: :delete, "data-confirm" => "本当に削除しますか？", class:"btn btn-danger" %></div>
+    </div>
+  </div>
+</div>
