@@ -1,30 +1,29 @@
-<script
-      src="https://code.jquery.com/jquery-3.7.1.js"
-      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-      crossorigin="anonymous"></script>
-  </head>
-  <body>
-    <input type="number" id="num1" class="num">
-    <input type="number" id="num2" class="num">
+    <!-- 農薬希釈計算機 -->
+    <label for="dilution_ratio">水量(L):</label>
+    <input type="number" id="dilution_ratio" class="num">
+    <label for="water_volume">希釈倍率:</label>
+    <input type="number" id="water_volume" class="num">
     <div id="result">0</div>
+  
     <script>
       $('.num').on('keyup', () => {
-        const num1 = parseInt($('#num1').val())
-        const num2 = parseInt($('#num2').val())
-        const result = $('#result')
-        const sum = num1 + num2
-        if (isNaN(sum)) {
-          result.text(0)
+        const dilutionRatio = parseFloat($('#dilution_ratio').val());
+        const waterVolume = parseFloat($('#water_volume').val());
+        const result = $('#result');
+        
+        if (!isNaN(dilutionRatio) && !isNaN(waterVolume) && waterVolume !== 0) {
+          const pesticideVolume = (dilutionRatio / waterVolume) * 1000;
+          result.text(pesticideVolume.toFixed(2) + " ml");
         } else {
-          result.text(sum)
+          result.text("0 ml or g");
         }
-      })
+      });
     </script>
     
     <p>栽培作物　：<%= farmer.crop %></p>
     <p>管理者　：<%= farmer.last_name %> <%= farmer.first_name %></p>
-    <%= link_to '栽培区画新規登録' new_farmer_farmland_path, class: "btn btn-dark" %>
-    <%= link_to '使用農薬新規登録' new_farmer_pesticide_path, class: "btn btn-dark" %>
-    <%= link_to '使用記録新規作成' new_farmer_record_path, class: "btn btn-dark" %>
+    <%= link_to '栽培区画新規登録', new_farmer_farmland_path, class:"btn btn-dark" %>
+    <%= link_to '使用農薬新規登録', new_farmer_pesticide_path, class:"btn btn-dark" %>
+    <%= link_to '使用記録新規作成', new_farmer_record_path, class:"btn btn-dark" %>
     
     <!-- 共通レイアウト呼び出し用 < %= render 'calculator', farmer: @farmer %> -->

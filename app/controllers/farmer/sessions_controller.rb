@@ -20,7 +20,7 @@ class Farmer::SessionsController < Devise::SessionsController
 
   def after_sign_out_path_for(resource)
 
-    farmer_current_farmer_path(current_farmer.id)
+    root_path
 
   end
 

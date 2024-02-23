@@ -1,13 +1,13 @@
 <div class="container">
-  <%= render 'calculator', farmer: @farmer %>
+  <%= render 'layouts/calculator', farmer: @farmer %>
   <div class="row">
     <div class="col">
       <h2>栽培区画新規登録</h2>
-      <%= form_with model: @farmland, url: farmer_farmlands_path do |f| %>
+      <%= form_with model: @farmland, url:  farmer_farmlands_path(@farmer, @farmland) do |f| %>
         <table class="table">
           <tr>
             <th scope="col">区画名</th>
-            <td><%= f.file_field :farmland %></td>
+            <td><%= f.text_field :farmland %></td>
           </tr>
           <tr>
             <th scope="col">栽培面積</th>

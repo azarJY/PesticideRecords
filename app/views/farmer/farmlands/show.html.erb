@@ -1,5 +1,5 @@
 <div class="container">
-  <%= render 'calculator', farmer: @farmer %>
+  <%= render 'layouts/calculator', farmer: @farmer %>
   <div class="row">
     <div class="col-4">
       <h2><%= @farmland.farmland %> 詳細</h2>
@@ -31,7 +31,7 @@
           </tr>
         </thead>
         <tbody>
-          <% @farmland.@records.each do |record| %>
+          <!--<% @records.each do |record| %>
           <tr>
             <td><%= record.day %></td>
             <%= link_to farmer_record_path(@record.id) do %>
@@ -39,7 +39,7 @@
             <% end %>
             <td><%= record.amount %></td>
           </tr>
-          <% end %>
+          <% end %>-->
         </tbody>
         <%= link_to '栽培区画削除', farmer_farmland_path(@farmland.id), method: :delete, "data-confirm" => "本当に削除しますか？",  class: "btn btn-danger" %>
     </table>
