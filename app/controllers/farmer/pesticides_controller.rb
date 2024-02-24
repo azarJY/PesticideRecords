@@ -3,9 +3,9 @@ class Farmer::PesticidesController < ApplicationController
   
   def index
     @farmer = Farmer.find(current_farmer.id)
-    @pesticides = Pesticide.all
-    pesticide_ids = @pesticides.pluck(:id)
-    @records = Record.where(pesticide_id: pesticide_ids)
+    @pesticides = current_farmer.pesticides.all
+    #pesticide_ids = @pesticides.pluck(:id)
+    #@records = Record.where(pesticide_id: pesticide_ids)
   end
 
   def new
@@ -15,9 +15,16 @@ class Farmer::PesticidesController < ApplicationController
   
   def create 
     @farmer = Farmer.find(current_farmer.id)
-    @pesticide = Pesticide.new(pesticide_params)
-    @pesticide.save
-    redirect_to farmer_pesticides_
+    @pesticide = current_farmer.pesticide.new(pesticide_params)
+    if  @pesticide.save
+      flash[:notice] = "農薬の追加に成功しました。"
+      redirect_to farmer_pesticides_path
+    else
+      flash[:notice] = "農薬の追加に失敗しました"
+      @pesticide = Pesticide.new
+      @farmer = Farmer.find(current_farmer.id)
+      render :new
+    end
   end
 
   def show

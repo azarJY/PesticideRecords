@@ -3,7 +3,7 @@ class Farmer::FarmlandsController < ApplicationController
 
   def index
     @farmer = Farmer.find(current_farmer.id)
-    @farmlands = Farmland.all
+    @farmlands = current_farmer.farmlands.all
     #pesticide_ids = @pesticides.pluck(:id)
     #@records = Record.where(pesticide_id: pesticide_ids)
   end
@@ -15,21 +15,27 @@ class Farmer::FarmlandsController < ApplicationController
 
   def create
     @farmer = Farmer.find(current_farmer.id)
-    @farmland = Farmland.new(farmland_params)
-    @farmland.save
-    redirect_to farmer_farmland_path(@farmer, @farmland.id)
+    @farmland = current_farmer.farmlands.new(farmland_params)
+    if  @farmland.save
+      flash[:notice] = "栽培区画の設定に成功しました。"
+      redirect_to farmer_farmlands_path
+    else
+      flash[:notice] = "栽培区画の設定に失敗しました"
+      @farmland = Farmland.new
+      @farmer = Farmer.find(current_farmer.id)
+      render :new
+    end
   end
 
   def show
-    @farmer = Farmer.find_by(id: current_farmer.id)
-    @farmland = @farmer.farmlands.find_by(id: params[:id])
-    puts "@farmland: #{@farmland.inspect}"
+    @farmer = Farmer.find(current_farmer.id)
+    @farmland = @farmer.farmlands.find(params[:id])
     @records = Record.all
   end
 
   def destroy
     @farmer = Farmer.find(current_farmer.id)
-    @farmland = @farmer.farmlands.find(id: params[:id])
+    @farmland = @farmer.farmlands.find(params[:id])
     @farmland.destroy
     redirect_to farmer_farmlands_path
   end
