@@ -1,5 +1,6 @@
 class Farmer::SeasonsController < ApplicationController
   before_action :authenticate_farmer!
+  # before_action :set_farmer  で会員情報はまとめて取得できるよう訂正
   
   def new
     @farmer = Farmer.find(current_farmer.id)
@@ -7,10 +8,12 @@ class Farmer::SeasonsController < ApplicationController
   end
   def create
     @farmer = Farmer.find(current_farmer.id)
-    @season = Season.new(season_params)
+    @season = current_farmer.season.new(season_params)
     if @season.save
-      redirect_to newfarmer_season_path, notice: 'Season was successfully created.'
+      flash[:notice] = "シーズン時期の設定に成功しました。"
+      redirect_to newfarmer_season_path
     else
+      flash[:notice] = "シーズン時期の設定に失敗しました。"
       render :new
     end
   end

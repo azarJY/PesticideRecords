@@ -3,7 +3,7 @@
   <div class="row justify-content-center">
     <div class="col">
       <h1>登録済農薬一覧</h1>
-      <h2 class="text-info"><%= link_to("農薬新規登録", new_farmer_pesticide_path), class: "btn btn-success" %></h2>
+      <h2 class="text-info"><%= link_to "農薬新規登録", new_farmer_pesticide_path, class:"btn btn-success" %></h2>
       <table class="table">
         <thead class="thead-dark">
           <tr>
@@ -17,15 +17,20 @@
           <% @pesticides.each do |pesticide| %>
             <tr>
               <td>
-                <%= link_to farmer_pesticide_path(pesticide.id) do %>
+                <%= link_to farmer_pesticide_path(pesticide) do %>
                   <%= pesticide.name %>
                 <% end %>
               </td>
               <td><%= pesticide.code %></td>
               <td><%= pesticide.subject %></td>
               <td>
-                <%= link_to farmer_record_path(@record.id) do %>
-                  <%= pesticide.record.day %> <%= pesticide.record.farmland %>
+                <% if pesticide.records.any? %>
+                  <% latest_record = pesticide.records.order(usage_date: :desc).first %>
+                  <%= link_to farmer_record_path(latest_record) do %>
+                    <%= latest_record.day %> <%= latest_record.farmland.name %>
+                  <% end %>
+                <% else %>
+                  <p>使用記録　無し</p>
                 <% end %>
               </td>
             </tr>

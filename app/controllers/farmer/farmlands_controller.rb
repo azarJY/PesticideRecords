@@ -1,11 +1,10 @@
 class Farmer::FarmlandsController < ApplicationController
   before_action :authenticate_farmer!
+  # before_action :set_farmer  で会員情報はまとめて取得できるよう訂正
 
   def index
     @farmer = Farmer.find(current_farmer.id)
     @farmlands = current_farmer.farmlands.all
-    #pesticide_ids = @pesticides.pluck(:id)
-    #@records = Record.where(pesticide_id: pesticide_ids)
   end
 
   def new
@@ -29,8 +28,7 @@ class Farmer::FarmlandsController < ApplicationController
 
   def show
     @farmer = Farmer.find(current_farmer.id)
-    @farmland = @farmer.farmlands.find(params[:id])
-    @records = Record.all
+    @farmland = current_farmer.farmlands.find(params[:id])
   end
 
   def destroy

@@ -1,5 +1,6 @@
 class Farmer::RecordsController < ApplicationController
   before_action :authenticate_farmer!
+  # before_action :set_farmer  で会員情報はまとめて取得できるよう訂正
   
   def index
     @farmer = Farmer.find(current_farmer.id)

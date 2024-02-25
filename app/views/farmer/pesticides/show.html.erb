@@ -27,7 +27,8 @@
       </table>
       
       <h1>使用可能回数一覧</h1><h2>使用可能回数<%= @pesticide.usable_number %></h2>
-      <%= link_to "シーズン時期設定", farmer_new_season_path, class: "btn btn-primary" %>
+      <%= link_to "シーズン時期設定", farmer_new_season_path, class:"btn btn-primary" %>
+      <!-- 繰り返し処理挟む -->
       <table class="table">
         <thead>
           <tr>
@@ -52,10 +53,10 @@
           </tr>
         </thead>
         <tbody>
-          <% @pesticides.@records.each do |record| %>
+          <% @pesticide.records.each do |record| %>
           <tr>
             <td><%= record.day %></td>
-            <%= link_to farmer_record_path(@record.id) do %>
+            <%= link_to farmer_record_path(pesticide.record.id) do %>
               <td><%= record.farmland %></td>
             <% end %>
             <td><%= record.amount %></td>

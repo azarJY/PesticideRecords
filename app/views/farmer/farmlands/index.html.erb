@@ -19,10 +19,16 @@
                   <%= farmland.farmland %>
                 <% end %>
               </td>
-              <!--<td>-->
-                <!--<=link_to farmer_record_path(@record.id) do%>-->
-                  <!--<= farmland.record.day %> <= farmland.record.name %>-->
-                <!--< end %>-->
+              <td>
+                <% if farmland.records.any? %>
+                  <% latest_record = farmland.records.order(usage_date: :desc).first %>
+                  <%= link_to farmer_record_path(latest_record) do %>
+                    <%= latest_record.day %> <%= latest_record.pesticide.name %>
+                  <% end %>
+                <% else %>
+                  <p>使用記録　無し</p>
+                <% end %>
+              </td>
               </td>
             </tr>
           <% end %>
