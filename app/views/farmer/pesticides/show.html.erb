@@ -26,8 +26,16 @@
         </tbody>
       </table>
       
-      <h1>使用可能回数一覧</h1><h2>使用可能回数<%= @pesticide.usable_number %></h2>
-      <%= link_to "シーズン時期設定", farmer_new_season_path, class:"btn btn-primary" %>
+      <h1>使用回数一覧</h1><h2>使用可能回数<%= @pesticide.usable_number %></h2>
+      <%= link_to "シーズン時期設定", new_farmer_season_path, class:"btn btn-primary" %>
+      <h3>
+        <% if @season.any? %>
+          <% latest_season = current_farmer.season.order(usage_date: :desc).first %>
+            <%= latest_season.start_date %> ～ <%= latest_season.end_date %>
+        <% else %>
+          <p>シーズン時期未設定</p>
+        <% end %>
+      </h3>
       <!-- 繰り返し処理挟む -->
       <table class="table">
         <thead>
@@ -37,10 +45,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td><%= @farmland.name %></td>
-            <td><%= @record_count %></td>
-          </tr>
+          <% @farmlands.each do |farmland| %>
+            <tr>
+              <td><%= farmland.name %></td>
+              <td><%= farmland.records_within_season(@season).where(pesticide_id: @pesticide.id).count %></td>
+            </tr>
+          <% end %>
         </tbody>
         
       </table>

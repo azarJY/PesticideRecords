@@ -3,24 +3,24 @@
   <div class="row">
     <div class="col">
       <h2>使用記録新規作成</h2>
-      <%= form_with model: @record, url:farmer_records_confirm_path, method: :post do |f| %>
+      <%= form_with model: @record, url: farmer_records_confirm_path, method: :post do |f| %>
         <table class="table">
           <tr>
             <th scope="col">日付</th>
             <td>
-              <%= form.text_field :day, class: 'form-control flatpickr', data: {enable_time: false} %>
+              <%= f.text_field :day, class: 'form-control flatpickr', data: {enable_time: false} %>
             </td>
           </tr>
           <tr>
             <th scope="col">農薬名</th>
             <td>
-              <%= f.select :pesticide_id, options_from_collection_for_select(@farmer.pesticide, :id, :name) %>
+              <%= f.select :pesticide_id, options_from_collection_for_select(current_farmer.pesticides, :id, :name) %>
             </td>
           </tr>
           <tr>
             <th scope="col">散布区画</th>
             <td>
-              <%= f.select :farmland_id, options_from_collection_for_select(@farmer.farmland, :id, :farmland) %>
+              <%= f.select :farmland_id, options_from_collection_for_select(current_farmer.farmlands, :id, :farmland) %>
             </td>
           </tr>
           <tr>
@@ -39,7 +39,7 @@
             <th scope="col">確認者</th>
             <td><%= f.text_field :confimer %></td>
           </tr>
-          
+
         </table>
         <%= f.submit '確認ページへ移行', class: "btn btn-success" %>
       <% end %>

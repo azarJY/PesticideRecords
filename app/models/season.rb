@@ -1,3 +1,3 @@
 class Season < ApplicationRecord
-    belongs_to :famer
+    belongs_to :farmer
 end

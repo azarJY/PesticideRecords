@@ -6,12 +6,13 @@ class Farmer::SeasonsController < ApplicationController
     @farmer = Farmer.find(current_farmer.id)
     @season = Season.new
   end
+  
   def create
     @farmer = Farmer.find(current_farmer.id)
-    @season = current_farmer.season.new(season_params)
+    @season = current_farmer.seasons.new(season_params)
     if @season.save
       flash[:notice] = "シーズン時期の設定に成功しました。"
-      redirect_to newfarmer_season_path
+      redirect_to new_farmer_season_path
     else
       flash[:notice] = "シーズン時期の設定に失敗しました。"
       render :new

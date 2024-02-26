@@ -4,7 +4,7 @@ class Farmer::RecordsController < ApplicationController
   
   def index
     @farmer = Farmer.find(current_farmer.id)
-    @records = Record.all
+    @records = current_farmer.records.all
   end
 
   def new

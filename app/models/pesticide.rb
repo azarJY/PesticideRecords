@@ -1,4 +1,4 @@
 class Pesticide < ApplicationRecord
-    has_many :records, dependent: :destroy
-    belongs_to :famer
+    has_many :records
+    belongs_to :farmer
 end

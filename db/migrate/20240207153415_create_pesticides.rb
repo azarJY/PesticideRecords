@@ -8,7 +8,6 @@ class CreatePesticides < ActiveRecord::Migration[6.1]
       t.string :use_method , null: false
       t.string :magnification , null: false
       t.integer :usable_number , null: false
-      t.text :ur , null: false
       t.timestamps
     end
   end

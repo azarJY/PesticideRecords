@@ -3,9 +3,10 @@ class Record < ApplicationRecord
     belongs_to :farmland
     belongs_to :pesticide
     
+    # 定められたseason内でのrecordを取得するメソッド
     def self.records_within_season(season)
       if season.present? && season.start_date.present? && season.end_date.present?
-        where("usage_date >= ? AND usage_date <= ?", season.start_date, season.end_date)
+        where("day >= ? AND day <= ?", season.start_date, season.end_date)
       else
         all
       end

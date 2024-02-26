@@ -1,9 +1,17 @@
 <div class="container">
+  <% if @pesticide.errors.any? %>
+    <%= @pesticide.errors.count %>件のエラーが発生しました
+    <ul>
+      <% @pesticide.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
   <%= render 'layouts/calculator', farmer: @farmer %>
   <div class="row">
     <div class="col">
       <h2>使用農薬新規登録</h2>
-      <%= form_with model: @pesticide, url: farmer_pesticides_path do |f| %>
+      <%= form_with model: @pesticide, url: farmer_pesticides_path(@farmer, @pesticide) do |f| %>
         <table class="table">
           <tr>
             <th scope="col">農薬名</th>

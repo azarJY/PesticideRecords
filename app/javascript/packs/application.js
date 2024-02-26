@@ -12,10 +12,11 @@ import "jquery";
 import "popper.js";
 import "bootstrap";
 import "../stylesheets/application"; 
+import flatpickr from 'flatpickr';
 
 // カレンダー形式用java設定
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('turbolinks:load', function() {
   flatpickr('.flatpickr', {
     dateFormat: 'Y-m-d',
     locale: 'ja',
