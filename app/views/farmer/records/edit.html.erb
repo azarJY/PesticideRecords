@@ -8,19 +8,19 @@
           <tr>
             <th scope="col">日付</th>
             <td>
-              <%= form.text_field :day, class: 'form-control flatpickr', data: {enable_time: false} %>
+              <%= f.text_field :day, class: 'form-control flatpickr', data: {enable_time: false} %>
             </td>
           </tr>
           <tr>
             <th scope="col">農薬名</th>
             <td>
-              <%= f.select :pesticide_id, options_from_collection_for_select(@farmer.pesticide, :id, :name) %>
+              <%= f.select :pesticide_id, options_from_collection_for_select(current_farmer.pesticides, :id, :name) %>
             </td>
           </tr>
           <tr>
             <th scope="col">散布区画</th>
             <td>
-              <%= f.select :farmland_id, options_from_collection_for_select(@farmer.farmland, :id, :farmland) %>
+              <%= f.select :farmland_id, options_from_collection_for_select(current_farmer.farmlands, :id, :farmland) %>
             </td>
           </tr>
           <tr>

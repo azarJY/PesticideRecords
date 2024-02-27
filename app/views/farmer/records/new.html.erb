@@ -1,4 +1,12 @@
 <div class="container">
+  <% if @record.errors.any? %>
+    <%= @record.errors.count %>件のエラーが発生しました
+    <ul>
+      <% @record.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
   <%= render 'layouts/calculator', farmer: @farmer %>
   <div class="row">
     <div class="col">
@@ -25,7 +33,7 @@
           </tr>
           <tr>
             <th scope="col">使用量(単位も入力)</th>
-            <td><%= f.text_field :anount %></td>
+            <td><%= f.text_field :amount %></td>
           </tr>
           <tr>
             <th scope="col">原水(単位も入力)</th>

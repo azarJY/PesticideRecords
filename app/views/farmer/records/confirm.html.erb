@@ -1,18 +1,18 @@
 <div class="container pt-5">
   <%= render 'layouts/calculator', farmer: @farmer %>
-  
+
   <div class="row pt-3">
     <div class="col-2"></div>
     <div class="col-2"><h1>使用記録新規作成情報確認</h1></div>
     <div class="col-8"></div>
   </div>
-  
+
   <div class="row pt-3">
     <table class="table">
       <tr><th>日付</th><td><%= @record.day %></td></tr>
       <tr><th>使用農薬</th><td><%= @record.name %></td></tr>
       <tr><th>適用病害虫</th><td><%= @record.subject %></td></tr>
-      <tr><th>散布区画</th><td><%= @record.farmland %></td></tr>
+      <tr><th>散布区画</th><td><%= @record.farmland.farmland %></td></tr>
       <tr><th>RACコード</th><td><%= @record.code %></td></tr>
       <tr><th>使用量</th><td><%= @record.amount %></td></tr>
       <tr><th>原水量</th><td><%= @record.water %></td></tr>
@@ -20,13 +20,16 @@
       <tr><th>確認者</th><td><%= @record.confimer %></td></tr>
     </table>
   </div>
-  
+
     <div class="pt-5 d-flex justify-content-center">
-    <%= form_with model: @record, url: farmer_records_path, method: :post do |f| %>
-      <%= f.hidden_field :name %>
-      <%= f.hidden_field :subject %>
-      <%= f.hidden_field :farmland %>
-      <%= f.hidden_field :code %>
-      <%= f.submit "新規作成", class: "btn btn-success" %>
-    <% end %>
+      <%= form_with model: @record, url: farmer_records_path, method: :post do |f| %>
+        <%= f.hidden_field :farmland_id, value: @record.farmland.id %>
+        <%= f.hidden_field :farmland, value: @record.farmland.farmland %>
+        <%= f.hidden_field :pesticide_id, value: @record.pesticide.id %>
+        <%= f.hidden_field :name, value: @record.name %>
+        <%= f.hidden_field :subject, value: @record.subject %>
+        <%= f.hidden_field :code, value: @record.code %>
+        <%= f.submit "新規作成", class: "btn btn-success" %>
+      <% end %>
+    </div>
 </div>

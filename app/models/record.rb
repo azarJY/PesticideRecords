@@ -1,5 +1,5 @@
 class Record < ApplicationRecord
-    belongs_to :famer
+    belongs_to :farmer
     belongs_to :farmland
     belongs_to :pesticide
     
