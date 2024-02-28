@@ -1,4 +1,12 @@
 <div class="container pt-5">
+    <% if @record.errors.any? %>
+    <%= @record.errors.count %>件のエラーが発生しました
+    <ul>
+      <% @record.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+    <% end %>
   <%= render 'layouts/calculator', farmer: @farmer %>
 
   <div class="row pt-3">
@@ -23,9 +31,10 @@
 
     <div class="pt-5 d-flex justify-content-center">
       <%= form_with model: @record, url: farmer_records_path, method: :post do |f| %>
-        <%= f.hidden_field :farmland_id, value: @record.farmland.id %>
+        <%= f.hidden_field :day, value: @record.day %>
+        <%= f.hidden_field :farmland_id, value: @record.farmland_id %>
         <%= f.hidden_field :farmland, value: @record.farmland.farmland %>
-        <%= f.hidden_field :pesticide_id, value: @record.pesticide.id %>
+        <%= f.hidden_field :pesticide_id, value: @record.pesticide_id %>
         <%= f.hidden_field :name, value: @record.name %>
         <%= f.hidden_field :subject, value: @record.subject %>
         <%= f.hidden_field :code, value: @record.code %>
