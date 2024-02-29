@@ -41,7 +41,7 @@ class Farmer::FarmlandsController < ApplicationController
   private
 
   def farmland_params
-     params.require(:farmland).permit(:farmland, :area, :overview)
+     params.require(:farmland).permit(:land, :area, :overview)
   end
 
 end

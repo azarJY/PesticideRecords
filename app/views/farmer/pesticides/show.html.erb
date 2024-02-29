@@ -47,7 +47,7 @@
         <tbody>
           <% @farmlands.each do |farmland| %>
             <tr>
-              <td><%= farmland.name %></td>
+              <td><%= farmland.land %></td>
               <td><%= farmland.records_within_season(@season).where(pesticide_id: @pesticide.id).count %></td>
             </tr>
           <% end %>
@@ -67,7 +67,7 @@
           <tr>
             <td><%= record.day %></td>
             <%= link_to farmer_record_path(pesticide.record.id) do %>
-              <td><%= record.farmland %></td>
+              <td><%= record.land %></td>
             <% end %>
             <td><%= record.amount %></td>
           </tr>

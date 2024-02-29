@@ -19,6 +19,7 @@ class Farmer::RecordsController < ApplicationController
     if params[:record][:farmland_id].present?
       selected_farmland = current_farmer.farmlands.find(params[:record][:farmland_id])
       @record.farmland.id = selected_farmland.id
+      @record.land = selected_farmland.land
     end
 
     if params[:record][:pesticide_id].present?
@@ -34,7 +35,6 @@ class Farmer::RecordsController < ApplicationController
   def create
     @farmer = Farmer.find(current_farmer.id)
     @record = current_farmer.records.new(record_params)
-    @record.farmland_id = params[:record][:farmland_id]
 
     Rails.logger.debug params[:record][:day]
 
@@ -68,14 +68,19 @@ class Farmer::RecordsController < ApplicationController
   def destroy
     @farmer = Farmer.find(current_farmer.id)
     @record = current_farmer.records.find(params[:id])
-    record.destroy
-    redirect_to farmer_records_path
+    if @record.destroy
+      flash[:notice] = "農薬使用記録の削除に成功しました。"
+      redirect_to farmer_records_path
+    else
+      flash[:notice] = "農薬使用記録の削除に失敗しました。"
+      render :edit
+    end
   end
 
   private
 
   def record_params
-     params.require(:record).permit(:day, :farmland_id, :pesticide_id, :name, :subject, :code, :farmland, :amount, :water, :user, :confimer)
+     params.require(:record).permit(:day, :farmland_id, :pesticide_id, :name, :subject, :code, :land, :amount, :water, :user, :confimer)
   end
 
 end

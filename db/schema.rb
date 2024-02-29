@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_02_26_140121) do
+ActiveRecord::Schema.define(version: 2024_02_28_235106) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 2024_02_26_140121) do
 
   create_table "farmlands", force: :cascade do |t|
     t.integer "farmer_id", null: false
-    t.string "farmland", null: false
+    t.string "land", null: false
     t.string "area", null: false
     t.text "overview", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -87,7 +87,7 @@ ActiveRecord::Schema.define(version: 2024_02_26_140121) do
     t.string "name", null: false
     t.string "subject", null: false
     t.string "code", null: false
-    t.string "farmland", null: false
+    t.string "land", null: false
     t.string "amount", null: false
     t.string "water", null: false
     t.string "user", null: false

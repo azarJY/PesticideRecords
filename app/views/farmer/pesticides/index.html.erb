@@ -27,7 +27,7 @@
                 <% if pesticide.records.any? %>
                   <% latest_record = pesticide.records.order(usage_date: :desc).first %>
                   <%= link_to farmer_record_path(latest_record) do %>
-                    <%= latest_record.day %> <%= latest_record.farmland.name %>
+                    <%= latest_record.day %> <%= latest_record.land %>
                   <% end %>
                 <% else %>
                   <p>使用記録　無し</p>

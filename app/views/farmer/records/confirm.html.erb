@@ -20,7 +20,7 @@
       <tr><th>日付</th><td><%= @record.day %></td></tr>
       <tr><th>使用農薬</th><td><%= @record.name %></td></tr>
       <tr><th>適用病害虫</th><td><%= @record.subject %></td></tr>
-      <tr><th>散布区画</th><td><%= @record.farmland.farmland %></td></tr>
+      <tr><th>散布区画</th><td><%= @record.land %></td></tr>
       <tr><th>RACコード</th><td><%= @record.code %></td></tr>
       <tr><th>使用量</th><td><%= @record.amount %></td></tr>
       <tr><th>原水量</th><td><%= @record.water %></td></tr>
@@ -30,14 +30,18 @@
   </div>
 
     <div class="pt-5 d-flex justify-content-center">
-      <%= form_with model: @record, url: farmer_records_path, method: :post do |f| %>
+      <%= form_with model: @record, url: farmer_records_path(@farmer, @record), method: :post do |f| %>
         <%= f.hidden_field :day, value: @record.day %>
         <%= f.hidden_field :farmland_id, value: @record.farmland_id %>
-        <%= f.hidden_field :farmland, value: @record.farmland.farmland %>
+        <%= f.hidden_field :land, value: @record.land %>
         <%= f.hidden_field :pesticide_id, value: @record.pesticide_id %>
         <%= f.hidden_field :name, value: @record.name %>
         <%= f.hidden_field :subject, value: @record.subject %>
         <%= f.hidden_field :code, value: @record.code %>
+        <%= f.hidden_field :amount, value: @record.amount %>
+        <%= f.hidden_field :water, value: @record.water %>
+        <%= f.hidden_field :user, value: @record.user %>
+        <%= f.hidden_field :confimer, value: @record.confimer %>
         <%= f.submit "新規作成", class: "btn btn-success" %>
       <% end %>
     </div>
