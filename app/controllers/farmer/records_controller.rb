@@ -60,8 +60,8 @@ class Farmer::RecordsController < ApplicationController
 
   def update
     @farmer = Farmer.find(current_farmer.id)
-    @record = current_farmer.records.find(params[:id])
-    record.update(record.params)
+    record = current_farmer.records.find(params[:id])
+    record.update(record_params)
     redirect_to farmer_records_path
   end
 

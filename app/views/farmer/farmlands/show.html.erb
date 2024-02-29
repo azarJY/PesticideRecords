@@ -34,7 +34,7 @@
           <%= @farmland.records.each do |record| %>
           <tr>
             <td><= record.day %></td>
-            <%= link_to farmer_record_path(farmland.record.id) do %>
+            <%= link_to farmer_record_path(@farmland.record.id) do %>
               <td><= record.name %></td>
             <% end %>
             <td><= record.amount %></td>

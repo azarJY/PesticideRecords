@@ -1,0 +1,39 @@
+<div class="container">
+  <%= render 'layouts/calculator', farmer: @farmer %>
+  <div class="row justify-content-center">
+    <div class="col">
+      <h1>登録済栽培区画一覧</h1>
+      <h2 class="text-info"><%= link_to "栽培区画新規登録", new_farmer_farmland_path, class:"btn btn-success" %></h2>
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">栽培区画</th>
+            <th scope="col">直近薬散記録(1件)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @farmlands.each do |farmland| %>
+            <tr>
+              <td>
+                <%= link_to farmer_farmland_path(farmland) do %>
+                  <%= farmland.land %>
+                <% end %>
+              </td>
+              <td>
+                <% if farmland.records.any? %>
+                  <% latest_record = farmland.records.order(usage_date: :desc).first %>
+                  <%= link_to farmer_record_path(latest_record) do %>
+                    <%= latest_record.day %> <%= latest_record.name %>
+                  <% end %>
+                <% else %>
+                  <p>使用記録　無し</p>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+        <tfooter></tfooter>
+      </table>
+    </div>
+  </div>
+</div>

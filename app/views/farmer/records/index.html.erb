@@ -17,10 +17,10 @@
             <% @records.each do |record| %>
                 <tr>
                   <td><%= record.day %></td>
-                  <%= link_to farmer_record_path(record.id) do %>
+                  <%= link_to farmer_record_path(record) do %>
                     <td><%= record.name %></td>
-                    <td><%= record.land %></td>
                   <% end %>
+                    <td><%= record.land %></td>
                   <td><%= record.amount %></td>
                 </tr>
             <% end %>
