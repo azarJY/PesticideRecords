@@ -25,18 +25,16 @@
           </tr>
         </tbody>
       </table>
-      
+
       <h1>使用回数一覧</h1><h2>使用可能回数<%= @pesticide.usable_number %></h2>
       <%= link_to "シーズン時期設定", new_farmer_season_path, class:"btn btn-primary" %>
       <h3>
-        <% if @season.any? %>
-          <% latest_season = current_farmer.season.order(usage_date: :desc).first %>
-            <%= latest_season.start_date %> ～ <%= latest_season.end_date %>
+        <% if @season %>
+          <p>シーズン期間: <%= @season.start_date %> - <%= @season.end_date %></p>
         <% else %>
           <p>シーズン時期未設定</p>
         <% end %>
       </h3>
-      <!-- 繰り返し処理挟む -->
       <table class="table">
         <thead>
           <tr>
@@ -48,11 +46,17 @@
           <% @farmlands.each do |farmland| %>
             <tr>
               <td><%= farmland.land %></td>
-              <td><%= farmland.records_within_season(@season).where(pesticide_id: @pesticide.id).count %></td>
+              <td>
+                <% if @usage_counts[farmland.land] %>
+                  <%= @usage_counts[farmland.land] %>
+                <% else %>
+                  0
+                <% end %>
+              </td>
             </tr>
           <% end %>
         </tbody>
-        
+
       </table>
       <table class="table">
         <thead>
@@ -66,14 +70,16 @@
           <% @pesticide.records.each do |record| %>
           <tr>
             <td><%= record.day %></td>
-            <%= link_to farmer_record_path(pesticide.record.id) do %>
-              <td><%= record.land %></td>
-            <% end %>
+            <td>
+              <%= link_to farmer_record_path(record) do %>
+                <%= record.land %>
+              <% end %>
+            </td>
             <td><%= record.amount %></td>
           </tr>
           <% end %>
         </tbody>
-        <%= link_to '栽培区画削除', farmer_pesticide_path(@pesticide.id), method: :delete, "data-confirm" => "本当に削除しますか？",  class: "btn btn-danger" %>
+        <%= link_to '農薬削除', farmer_pesticide_path(@pesticide.id), method: :delete, "data-confirm" => "本当に削除しますか？",  class: "btn btn-danger" %>
       </table>
   </div>
 </div>
