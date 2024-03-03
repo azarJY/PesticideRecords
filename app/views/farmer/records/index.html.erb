@@ -16,11 +16,13 @@
         <tbody>
             <% @records.each do |record| %>
                 <tr>
-                  <td><%= record.day %></td>
                   <td>
                     <%= link_to farmer_record_path(record) do %>
-                      <%= record.name %>
+                      <%= record.day %>
                     <% end %>
+                  </td>
+                  <td>
+                    <%= record.name %>
                   </td>
                     <td><%= record.land %></td>
                   <td><%= record.amount %></td>

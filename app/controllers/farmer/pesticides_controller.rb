@@ -24,27 +24,27 @@ class Farmer::PesticidesController < ApplicationController
     end
   end
 
-
-
   def show
     @farmer = Farmer.find(current_farmer.id)
     @pesticide = current_farmer.pesticides.find(params[:id])
-    @season = current_farmer.seasons.last # 最新のシーズンを取得
+    @season = current_farmer.seasons.last
     @farmlands = current_farmer.farmlands.all
-    @usage_counts = {} # 各栽培区画での使用回数を格納するハッシュ
-    
-    if @season
-      @farmlands_with_records = @pesticide.records.where(created_at: @season.start_date..@season.end_date).map(&:farmland).uniq
-      @farmlands_with_records.each do |farmland|
-        @usage_counts[farmland.land] = @pesticide.records.where(farmland: farmland, created_at: @season.start_date..@season.end_date).count
-      end
+
+    if @season # シーズン未設定の場合のエラー回避
+      @records_within_season = @pesticide.records.where(day: @season.start_date..@season.end_date)
     else
-      # シーズンが設定されていない場合は全てのレコードをカウント
-      @farmlands.each do |farmland|
-        @usage_counts[farmland.land] = @pesticide.records.where(farmland: farmland).count
-      end
+      @records_within_season = @pesticide.records
+    end
+
+    @farmlands_with_records = @records_within_season.map(&:farmland).uniq
+    @usage_counts = {}
+    @farmlands_with_records.each do |farmland|
+      @usage_counts[farmland.land] = @records_within_season.where(farmland: farmland).count
     end
   end
+
+
+
 
   def destroy
     @farmer = Farmer.find(current_farmer.id)

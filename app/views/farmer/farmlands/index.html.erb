@@ -21,7 +21,7 @@
               </td>
               <td>
                 <% if farmland.records.any? %>
-                  <% latest_record = farmland.records.order(usage_date: :desc).first %>
+                  <% latest_record = farmland.records.order(day: :desc).first %>
                   <%= link_to farmer_record_path(latest_record) do %>
                     <%= latest_record.day %> <%= latest_record.name %>
                   <% end %>

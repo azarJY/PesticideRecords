@@ -25,7 +25,7 @@
               <td><%= pesticide.subject %></td>
               <td>
                 <% if pesticide.records.any? %>
-                  <% latest_record = pesticide.records.order(usage_date: :desc).first %>
+                  <% latest_record = pesticide.records.order(day: :desc).first %>
                   <%= link_to farmer_record_path(latest_record) do %>
                     <%= latest_record.day %> <%= latest_record.land %>
                   <% end %>

@@ -5,6 +5,10 @@ Rails.application.routes.draw do
     sessions: 'farmer/sessions'
   }
 
+  devise_scope :farmer do
+    post 'farmers/guest_sign_in', to: 'farmer/sessions#guest_sign_in', as: :farmer_guest_sign_in
+  end
+
   root to: 'homes#top'
 
   namespace :farmer do
