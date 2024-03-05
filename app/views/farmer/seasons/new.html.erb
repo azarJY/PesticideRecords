@@ -9,6 +9,9 @@
     <%= form.label :end_date, "栽培シーズン終了日" %>
     <%= form.text_field :end_date, class: 'form-control flatpickr', data: {enable_time: false} %>
   </div>
-
-  <%= form.submit "シーズン時期設定", class: "btn btn-primary" %>
+  <% unless @farmer.guest? %>
+    <%= form.submit "シーズン時期設定", class: "btn btn-primary" %>
+  <% else %>
+    <p>ゲストユーザーのためシーズン登録が行えません。</p>
+  <% end %>
 <% end %>

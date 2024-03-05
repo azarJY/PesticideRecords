@@ -1,6 +1,6 @@
 class Farmer::RecordsController < ApplicationController
   before_action :authenticate_farmer!
-  # before_action :set_farmer  で会員情報はまとめて取得できるよう訂正
+  before_action :check_guest, only: [:confirm, :create, :edit, :update, :destroy]
 
   def index
     @farmer = Farmer.find(current_farmer.id)
@@ -78,6 +78,13 @@ class Farmer::RecordsController < ApplicationController
   end
 
   private
+  
+  def check_guest
+    @farmer = Farmer.find(current_farmer.id)
+    if @farmer.guest?
+      redirect_to farmer_records_path, alert: 'ゲストユーザーは記録の作成や編集が行えません。'
+    end
+  end
 
   def record_params
      params.require(:record).permit(:day, :farmland_id, :pesticide_id, :name, :subject, :code, :land, :amount, :water, :user, :confimer)

@@ -2,7 +2,11 @@
 <div class="container pt-5">
   <h1>マイページ</h1>
   <div class="row pt-3">
-    <%= link_to "編集する", edit_farmer_current_farmer_path, class:"btn btn-success" %>
+    <% unless @farmer.guest? %>
+      <%= link_to "編集する", edit_farmer_current_farmer_path, class:"btn btn-success" %>
+    <% else %>
+      <p>ゲストユーザー編集は行えません。</p>
+    <% end %>
   </div>
   <div class="row pt-3">
     <table class="table col-6">

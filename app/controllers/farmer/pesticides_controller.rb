@@ -1,7 +1,7 @@
 class Farmer::PesticidesController < ApplicationController
   before_action :authenticate_farmer!
-  # before_action :set_farmer  で会員情報はまとめて取得できるよう訂正
-
+  before_action :check_guest, only: [:create, :destroy]
+  
   def index
     @farmer = Farmer.find(current_farmer.id)
     @pesticides = current_farmer.pesticides.all
@@ -43,9 +43,6 @@ class Farmer::PesticidesController < ApplicationController
     end
   end
 
-
-
-
   def destroy
     @farmer = Farmer.find(current_farmer.id)
     @pesticide = current_farmer.pesticides.find(params[:id])
@@ -54,6 +51,13 @@ class Farmer::PesticidesController < ApplicationController
   end
 
   private
+  
+  def check_guest
+    @farmer = Farmer.find(current_farmer.id)
+    if @farmer.guest?
+      redirect_to farmer_pesticides_path, alert: 'ゲストユーザーは作成や編集が行えません。。'
+    end
+  end
 
   def pesticide_params
      params.require(:pesticide).permit(:name, :code, :subject, :use_method, :magnification, :usable_number)

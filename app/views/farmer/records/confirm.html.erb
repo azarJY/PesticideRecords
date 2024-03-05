@@ -42,7 +42,12 @@
         <%= f.hidden_field :water, value: @record.water %>
         <%= f.hidden_field :user, value: @record.user %>
         <%= f.hidden_field :confimer, value: @record.confimer %>
-        <%= f.submit "新規作成", class: "btn btn-success" %>
+        
+        <% unless @farmer.guest? %>
+          <%= f.submit "新規作成", class: "btn btn-success" %>
+        <% else %>
+          <p>ゲストユーザーのため作成や編集が行えません。</p>
+        <% end %>
       <% end %>
     </div>
 </div>

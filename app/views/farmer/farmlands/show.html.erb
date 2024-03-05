@@ -43,7 +43,11 @@
           </tr>
           <% end %>
         </tbody>
-        <%= link_to '栽培区画削除', farmer_farmland_path(@farmland.id), method: :delete, "data-confirm" => "本当に削除しますか？",  class: "btn btn-danger" %>
+        <% unless @farmer.guest? %>
+          <%= link_to '栽培区画削除', farmer_farmland_path(@farmland.id), method: :delete, "data-confirm" => "本当に削除しますか？",  class: "btn btn-danger" %>
+        <% else %>
+          <p>ゲストユーザーのため作成や編集が行えません。</p>
+        <% end %>
     </table>
     </div>
   </div>

@@ -1,6 +1,6 @@
 class Farmer::SeasonsController < ApplicationController
   before_action :authenticate_farmer!
-  # before_action :set_farmer  で会員情報はまとめて取得できるよう訂正
+  before_action :check_guest, only: [:create]
   
   def new
     @farmer = Farmer.find(current_farmer.id)
@@ -20,6 +20,13 @@ class Farmer::SeasonsController < ApplicationController
   end
   
   private
+  
+  def check_guest
+    @farmer = Farmer.find(current_farmer.id)
+    if @farmer.guest?
+      redirect_to new_farmer_season_path, alert: 'ゲストユーザーはシーズンが行えません。'
+    end
+  end
   
   def season_params
      params.require(:season).permit(:start_date, :end_date)

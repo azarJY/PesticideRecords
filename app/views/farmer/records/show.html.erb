@@ -19,5 +19,9 @@
       <tr><th>確認者</th><td><%= @record.confimer %></td></tr>
     </table>
   </div>
-  <div class="row pt-3"><%= link_to '使用記録編集', edit_farmer_record_path, class: "btn btn-primary" %></div>
+  <% unless @farmer.guest? %>
+    <div class="row pt-3"><%= link_to '使用記録編集', edit_farmer_record_path, class: "btn btn-primary" %></div>
+  <% else %>
+    <p>ゲストユーザーのため作成や編集が行えません。</p>
+  <% end %>
 </div>

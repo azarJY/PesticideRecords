@@ -14,13 +14,17 @@
       <h2 class="d-flex justify-content-center">退会する場合は、以下「退会する」をクリックしてください。</h2>
     </div>
   </div>
-  <div class="row pt-5">
-     <div class="col">
-       <div class="d-flex justify-content-center"><%= link_to '退会しない', edit_farmer_current_farmer_path(current_farmer), class:"btn btn-primary" %></div>
-     </div>
-     <div class="col">
-       <div class="d-flex justify-content-center"><%= link_to '退会する', farmer_current_farmer_path(current_farmer), method: :delete, "data-confirm" => "本当に退会しますか？", class:"btn btn-danger" %></div>
-     </div>
-  </div>
+  <% unless @farmer.guest? %>
+    <div class="row pt-5">
+      <div class="col">
+        <div class="d-flex justify-content-center"><%= link_to '退会しない', edit_farmer_current_farmer_path(current_farmer), class:"btn btn-primary" %></div>
+      </div>
+      <div class="col">
+        <div class="d-flex justify-content-center"><%= link_to '退会する', farmer_current_farmer_path(current_farmer), method: :delete, "data-confirm" => "本当に退会しますか？", class:"btn btn-danger" %></div>
+      </div>
+    </div>
+  <% else %>
+    <p>ゲストユーザー編集は行えません。</p>
+  <% end %>
 
 </div>

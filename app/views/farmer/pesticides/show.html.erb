@@ -79,7 +79,11 @@
           </tr>
           <% end %>
         </tbody>
-        <%= link_to '農薬削除', farmer_pesticide_path(@pesticide.id), method: :delete, "data-confirm" => "本当に削除しますか？",  class: "btn btn-danger" %>
+        <% unless @farmer.guest? %>
+          <%= link_to '農薬削除', farmer_pesticide_path(@pesticide.id), method: :delete, "data-confirm" => "本当に削除しますか？",  class: "btn btn-danger" %>
+        <% else %>
+          <p>ゲストユーザーのため作成や編集が行えません。</p>
+        <% end %>
       </table>
   </div>
 </div>
