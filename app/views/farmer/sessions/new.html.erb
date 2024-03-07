@@ -1,9 +1,9 @@
 <div class="container">
   <div class="row">
     <div class="mx-auto">
-      <h2 class="pt-5">ログイン</h2>
+      <h2 class="pt-5 custom-font">ログイン</h2>
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <table class="table">
+      <table class="table custom-font">
         <tr><th class="col">メールアドレス</th>
           <td>
             <div class="field">
@@ -26,7 +26,7 @@
         </div>
       <% end %>
 
-      <div class="actions">
+      <div class="actions d-flex justify-content-center custom-font">
         <%= f.submit "ログイン", class:"btn btn-primary" %>
       </div>
     <% end %>

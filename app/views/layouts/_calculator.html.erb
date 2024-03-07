@@ -1,32 +1,41 @@
     <div class="col-md-4">
+      <div class="sidebar">
+        <h2 class="custom-font">農薬希釈計算機 <i class="fa-sharp fa-solid fa-calculator"></i></h2>
+        
+        <div class="form-group">
+          <label for="dilution_ratio" class="form-label custom-font"><i class="fa-solid fa-droplet"></i> 水量(L)</i></label>
+          <input type="number" id="dilution_ratio" class="form-control form-control-lg">
+        </div>
       
+        <div class="form-group">
+          <label for="water_volume" class="form-label custom-font"><i class="fa-solid fa-prescription-bottle"></i> 希釈倍率</label>
+          <input type="number" id="water_volume" class="form-control form-control-lg">
+        </div>
+      
+        <div id="result" class="fs-5 mt-3 custom-font">必要農薬量(ml or g)</div>
+        
+        <p class="custom-font mt-3">栽培作物　：<%= farmer.crop %></p>
+        <p class="custom-font">管理者　：<%= farmer.last_name %> <%= farmer.first_name %></p>
+        <%= link_to '栽培区画新規登録', new_farmer_farmland_path, class:"btn btn-dark btn-lg mt-3" %>
+        <%= link_to '使用農薬新規登録', new_farmer_pesticide_path, class:"btn btn-dark btn-lg mt-3" %>
+        <%= link_to '使用記録新規作成', new_farmer_record_path, class:"btn btn-dark btn-lg mt-3" %>
+      </div>
     </div>    
     
-    <!-- 農薬希釈計算機 -->
-    <label for="dilution_ratio">水量(L):</label></br>
-    <input type="number" id="dilution_ratio" class="num">
-    <label for="water_volume">希釈倍率:</label>
-    <input type="number" id="water_volume" class="num">
-    <div id="result">0</div>
-  
     <script>
-      $('.num').on('keyup', () => {
-        const dilutionRatio = parseFloat($('#dilution_ratio').val());
-        const waterVolume = parseFloat($('#water_volume').val());
-        const result = $('#result');
-        
-        if (!isNaN(dilutionRatio) && !isNaN(waterVolume) && waterVolume !== 0) {
-          const pesticideVolume = (dilutionRatio / waterVolume) * 1000;
-          result.text(pesticideVolume.toFixed(2) + " ml");
-        } else {
-          result.text("0 ml or g");
-        }
+      $(document).ready(function() {
+          $('#dilution_ratio, #water_volume').on('keyup', function() {
+              const dilutionRatio = parseFloat($('#dilution_ratio').val());
+              const waterVolume = parseFloat($('#water_volume').val());
+              const result = $('#result');
+              
+              if (!isNaN(dilutionRatio) && !isNaN(waterVolume) && waterVolume !== 0) {
+                  const pesticideVolume = (dilutionRatio / waterVolume) * 1000;
+                  result.text(pesticideVolume.toFixed(2) + " ml");
+              } else {
+                  result.text("必要農薬量＝ 0 ml or g");
+              }
+          });
       });
+
     </script>
-    
-    <p>栽培作物　：<%= farmer.crop %></p>
-    <p>管理者　：<%= farmer.last_name %> <%= farmer.first_name %></p>
-    <%= link_to '栽培区画新規登録', new_farmer_farmland_path, class:"btn btn-dark" %>
-    <%= link_to '使用農薬新規登録', new_farmer_pesticide_path, class:"btn btn-dark" %>
-    <%= link_to '使用記録新規作成', new_farmer_record_path, class:"btn btn-dark" %>
-  
