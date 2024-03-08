@@ -1,9 +1,10 @@
-<%= render 'layouts/calculator', farmer: @farmer %>
-<div class="container pt-5">
-  <h1>会員情報編集</h1>
-  <div class="row pt-3">
+<div class="row pt-3">
+  <%= render 'layouts/calculator', farmer: @farmer %>
+  <div class="col-md-1"></div>
+  <div class="col-md-7">
+    <h1 class="d-flex justify-content-center">会員情報編集</h1>
     <%= form_with model: @farmer, url: farmer_current_farmer_path, method: :patch do |f| %>
-    <table class="table">
+    <table class="table mt-5">
       <tr><th scope="col">農場名</th><td><%= f.text_field :farm_name %></td></tr>
       <tr><th scope="col">名前</th>
         <td><%= f.text_field :last_name %>  <%= f.text_field :first_name %></td>
@@ -16,11 +17,11 @@
       <tr><th scope="col">メールアドレス</th><td><%= f.text_field :email %></td></tr>
     </table>
     <% unless @farmer.guest? %>
-      <%= f.submit "編集内容を保存", class:"btn btn-success" %>
-      <%= link_to "退会処理はこちらから", current_farmer_confirm_path, class: 'btn btn-danger'%>
+      <div class="d-flex justify-content-end"><%= f.submit "編集内容を保存", class:"btn btn-success" %></div><br>
+      <div class="d-flex justify-content-center"><%= link_to "退会処理はこちらから", current_farmer_confirm_path, class:'btn btn-danger mt-5'%></div>
     <% else %>
       <p>ゲストユーザー編集は行えません。</p>
     <% end %>
-<% end %>
+  <% end %>
   </div>
 </div>

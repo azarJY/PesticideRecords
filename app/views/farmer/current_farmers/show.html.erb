@@ -2,22 +2,17 @@
   <%= render 'layouts/calculator', farmer: @farmer %>
   <div class="col-md-1"></div>
   <div class="col-md-7">
-    
-  </div>
-</div>
-<!--共通レイアウトBoostrapベース-->
 
-<div class="container pt-5">
-  <h1>マイページ</h1>
-  <div class="row pt-3">
-    <% unless @farmer.guest? %>
-      <%= link_to "編集する", edit_farmer_current_farmer_path, class:"btn btn-success" %>
-    <% else %>
-      <p>ゲストユーザー編集は行えません。</p>
-    <% end %>
-  </div>
-  <div class="row pt-3">
-    <table class="table col-6">
+    <h1 class="d-flex justify-content-center">マイページ</h1>
+    <div class="col-pt-2 d-flex justify-content-end">
+      <% unless @farmer.guest? %>
+        <%= link_to "編集する", edit_farmer_current_farmer_path, class:"btn btn-success" %>
+      <% else %>
+        <p>ゲストユーザー編集は行えません。</p>
+      <% end %>
+    </div>
+
+    <table class="table col-8 mt-4">
       <tr>
         <th class="table-dark">農場名</th>
         <td>
@@ -44,6 +39,7 @@
         <th class="table-dark">メールアドレス</th>
         <td><%= @farmer.email %></td>
       </tr>
-      </table>
+    </table>
+  </div>
   </div>
 </div>

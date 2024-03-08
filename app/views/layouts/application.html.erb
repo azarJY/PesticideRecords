@@ -19,28 +19,18 @@
       font-weight: 400;
       font-style: normal;
     }
-    
-    .custom-font24 {
-      font-family: "Yuji Boku", serif;
-      font-weight: 400;
-      font-style: normal;
-      font-size: 24px;
-    }
 
-    .custom-font48 {
-      font-family: "Yuji Boku", serif;
-      font-weight: 400;
-      font-style: normal;
+    .fsize48 {
       font-size: 48px;
     }
   </style>
   </head>
 
-  <body>
+  <body class="custom-font">
     <header style="background-image: url('<%= asset_path('strowberry.jpg') %>'); background-size: cover; background-position: center; height: 150px; position: relative;">
       <nav class="navbar navbar-expand-lg navbar-dark bg-info" style="background-color: transparent !important;">
         <div class="container">
-          <%= link_to "農効", root_path, class: "navbar-brand custom-font48 " %>
+          <h1><%= link_to "農効", root_path, class: "navbar-brand fsize48" %></h1>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -48,29 +38,29 @@
             <ul class="navbar-nav ml-auto">
               <% if farmer_signed_in? %>
                 <li class="nav-item">
-                  <div class="text-light mx-5 custom-font48"><%= current_farmer.farm_name %></div>
+                  <div class="text-light mx-5 fsize48"><%= current_farmer.farm_name %></div>
                 </li>
                 <li class="nav-item">
-                  <%= link_to "栽培区画一覧", farmer_farmlands_path, class:'nav-link text-dark btn btn-light mt-5 ml-2 custom-font' %>
+                  <%= link_to "栽培区画一覧", farmer_farmlands_path, class:'nav-link text-info btn btn-light mt-5 ml-2' %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to "農薬一覧", farmer_pesticides_path, class:'nav-link text-dark btn btn-light mt-5 ml-2 custom-font' %>
+                  <%= link_to "農薬一覧", farmer_pesticides_path, class:'nav-link text-warning btn btn-light mt-5 ml-2' %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to "使用記録一覧", farmer_records_path, class:'nav-link text-dark btn btn-light mt-5 ml-2 custom-font' %>
+                  <%= link_to "使用記録一覧", farmer_records_path, class:'nav-link text-dark btn btn-light mt-5 ml-2' %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to "マイページ", farmer_current_farmer_path(current_farmer), class:'nav-link text-dark btn btn-light mt-5 ml-2 custom-font' %>
+                  <%= link_to "マイページ", farmer_current_farmer_path(current_farmer), class:'nav-link text-dark btn btn-light mt-5 ml-2' %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to "ログアウト", destroy_farmer_session_path, method: :delete, class:'nav-link text-dark btn btn-light mt-5 ml-2 custom-font' %>
+                  <%= link_to "ログアウト", destroy_farmer_session_path, method: :delete, "data-confirm" => "ログアウトしますか？", class:'nav-link text-danger btn btn-light mt-5 ml-2' %>
                 </li>
               <% else %>
                 <li class="nav-item">
-                  <%= link_to "新規登録", new_farmer_registration_path, class:'nav-link text-dark btn btn-light mt-5 ml-2 custom-font' %>
+                  <%= link_to "新規登録", new_farmer_registration_path, class:'nav-link text-dark btn btn-light mt-5 ml-2' %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to "ログイン", new_farmer_session_path, class:'nav-link text-dark btn btn-light mt-5 ml-2 custom-font' %>
+                  <%= link_to "ログイン", new_farmer_session_path, class:'nav-link text-dark btn btn-light mt-5 ml-2' %>
                 </li>
               <% end %>
             </ul>
@@ -85,12 +75,12 @@
         <%= yield %>
       </div>
     </main>
-    
+
     <footer>
       <div class="container mt-5">
         <div class="row">
           <div class="mx-auto">
-            <p class="custom-font"><i class="fa-solid fa-wheat-awn"></i><i class="fa-solid fa-wheat-awn"></i>日本農効株式会社<i class="fa-solid fa-tractor"></i></p>
+            <p class="custom-font"><i class="fa-solid fa-wheat-awn"></i><i class="fa-solid fa-wheat-awn"></i>日本農効株式会社 <i class="fa-solid fa-tractor"></i></p>
           </div>
         </div>
       </div>
