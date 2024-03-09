@@ -1,88 +1,94 @@
-
+<div class="row pt-3">
   <%= render 'layouts/calculator', farmer: @farmer %>
-  <div class="row justify-content-center">
-    <div class="col">
-      <h1><%= @pesticide.name %> 詳細</h1>
+  <div class="col-md-8">
+    <h1 class="d-flex justify-content-center"><%= @pesticide.name %> 詳細</h1>
+    
+    <table class="mt-4 table text-center">
+      <thead class="thead-dark">
+        <tr>
+          <th>RAC</th>
+          <th>適用病害虫</th>
+          <th>使用方法</th>
+          <th>希釈倍率</th>
+          <th>使用可能回数</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= @pesticide.code %></td>
+          <td><%= @pesticide.subject %></td>
+          <td><%= @pesticide.use_method %></td>
+          <td><%= @pesticide.magnification %></td>
+          <td><%= @pesticide.usable_number %></td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <h1 class="mt-5 d-flex justify-content-center">各栽培区画使用回数一覧</h1>
+    <h3 class="d-flex justify-content-center">使用可能回数 <%= @pesticide.usable_number %></h3>
+    <div class="pt-4 d-flex justify-content-end">
+      <%= link_to "シーズン時期設定", new_farmer_season_path, class:"btn btn-secondary" %>
     </div>
-    <div class="col-2">
-      <table class="table">
-        <thead>
+    <div class="mt-3 d-flex justify-content-first">
+      <% if @season %>
+        <h3>シーズン期間: <%= @season.start_date %> ~ <%= @season.end_date %></h3>
+      <% else %>
+        <p>シーズン時期未設定</p>
+      <% end %>
+    </div>
+    <table class="mt-4 table text-center">
+      <thead class="thead-dark">
+        <tr>
+          <th>栽培区画</th>
+          <th>使用回数</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @farmlands.each do |farmland| %>
           <tr>
-            <th>RAC</th>
-            <th>適用病害虫</th>
-            <th>使用方法</th>
-            <th>希釈倍率</th>
-            <th>使用可能回数</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><%= @pesticide.code %></td>
-            <td><%= @pesticide.subject %></td>
-            <td><%= @pesticide.use_method %></td>
-            <td><%= @pesticide.magnification %></td>
-            <td><%= @pesticide.usable_number %></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h1>使用回数一覧</h1><h2>使用可能回数<%= @pesticide.usable_number %></h2>
-      <%= link_to "シーズン時期設定", new_farmer_season_path, class:"btn btn-primary" %>
-      <h3>
-        <% if @season %>
-          <p>シーズン期間: <%= @season.start_date %> - <%= @season.end_date %></p>
-        <% else %>
-          <p>シーズン時期未設定</p>
-        <% end %>
-      </h3>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>栽培区画</th>
-            <th>使用回数</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @farmlands.each do |farmland| %>
-            <tr>
-              <td><%= farmland.land %></td>
-              <td>
-                <% if @usage_counts[farmland.land] %>
-                  <%= @usage_counts[farmland.land] %>
-                <% else %>
-                  0
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-
-      </table>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>日付</th>
-            <th>栽培区画</th>
-            <th>使用量</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @pesticide.records.each do |record| %>
-          <tr>
+            <td><%= farmland.land %></td>
             <td>
-              <%= link_to farmer_record_path(record) do %>
-                <%= record.day %>
+              <% if @usage_counts[farmland.land] %>
+                <%= @usage_counts[farmland.land] %>
+              <% else %>
+                0
               <% end %>
             </td>
-            <td><%= record.land %></td>
-            <td><%= record.amount %></td>
           </tr>
-          <% end %>
-        </tbody>
-        <% unless @farmer.guest? %>
-          <%= link_to '農薬削除', farmer_pesticide_path(@pesticide.id), method: :delete, "data-confirm" => "本当に削除しますか？",  class: "btn btn-danger" %>
-        <% else %>
-          <p>ゲストユーザーのため作成や編集が行えません。</p>
         <% end %>
-      </table>
+      </tbody>
+    </table>
+    
+    <h1 class="mt-5 d-flex justify-content-center"><%= @pesticide.name %>農薬使用記録一覧</h1>
+    <table class="mt-4 table text-center">
+      <thead class="thead-dark">
+        <tr>
+          <th>日付</th>
+          <th>栽培区画</th>
+          <th>使用量</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @pesticide.records.each do |record| %>
+        <tr>
+          <td>
+            <%= link_to farmer_record_path(record), class:"text-success" do %>
+              <%= record.day %>
+            <% end %>
+          </td>
+          <td><%= record.land %></td>
+          <td><%= record.amount %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+      <% unless @farmer.guest? %>
+        <div class="pt-5 mt-5 d-flex justify-content-end">
+          <%= link_to '農薬削除', farmer_pesticide_path(@pesticide.id), method: :delete, "data-confirm" => "本当に削除しますか？",  class: "btn btn-danger" %>
+        </div>
+      <% else %>
+        <p>ゲストユーザーのため作成や編集が行えません。</p>
+      <% end %>
+    
   </div>
+</div>

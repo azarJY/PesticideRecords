@@ -1,55 +1,61 @@
-<div class="container">
+<div class="row pt-3">
   <%= render 'layouts/calculator', farmer: @farmer %>
-  <div class="row">
-    <div class="col">
-      <h2>使用記録編集</h2>
-      <%= form_with model: @record, url: farmer_record_path(@record), method: :patch do |f| %>
-        <table class="table">
-          <tr>
-            <th scope="col">日付</th>
-            <td>
-              <%= f.text_field :day, class: 'form-control flatpickr', data: {enable_time: false} %>
-            </td>
-          </tr>
-          <tr>
-            <th scope="col">農薬名</th>
-            <td>
-              <%= f.select :pesticide_id, options_from_collection_for_select(current_farmer.pesticides, :id, :name) %>
-            </td>
-          </tr>
-          <tr>
-            <th scope="col">散布区画</th>
-            <td>
-              <%= f.select :farmland_id, options_from_collection_for_select(current_farmer.farmlands, :id, :land) %>
-            </td>
-          </tr>
-          <tr>
-            <th scope="col">使用量(単位も入力)</th>
-            <td><%= f.text_field :amount %></td>
-          </tr>
-          <tr>
-            <th scope="col">原水(単位も入力)</th>
-            <td><%= f.text_field :water %></td>
-          </tr>
-          <tr>
-            <th scope="col">散布者</th>
-            <td><%= f.text_field :user %></td>
-          </tr>
-          <tr>
-            <th scope="col">確認者</th>
-            <td><%= f.text_field :confimer %></td>
-          </tr>
+  <div class="col-md-1"></div>
+  <div class="col-md-7">
+    <h1 class="d-flex justify-content-center">使用記録編集</h1>
 
-        </table>
-        <% unless @farmer.guest? %>
+    <%= form_with model: @record, url: farmer_record_path(@record), method: :patch do |f| %>
+      <table class="mt-4 table text-center">
+        <tr>
+          <th scope="col">日付</th>
+          <td>
+            <%= f.text_field :day, class: 'form-control flatpickr', data: {enable_time: false} %>
+          </td>
+        </tr>
+        <tr>
+          <th scope="col">農薬名</th>
+          <td>
+            <div class="form-group">
+              <%= f.select :pesticide_id, options_from_collection_for_select(current_farmer.pesticides, :id, :name) %>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th scope="col">散布区画</th>
+          <td>
+            <div class="form-group">
+              <%= f.select :farmland_id, options_from_collection_for_select(current_farmer.farmlands, :id, :land) %>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th scope="col">使用量(単位も入力)</th>
+          <td><%= f.text_field :amount, class:"form-control" %></td>
+        </tr>
+        <tr>
+          <th scope="col">原水(単位も入力)</th>
+          <td><%= f.text_field :water, class:"form-control" %></td>
+        </tr>
+        <tr>
+          <th scope="col">散布者</th>
+          <td><%= f.text_field :user, class:"form-control" %></td>
+        </tr>
+        <tr>
+          <th scope="col">確認者</th>
+          <td><%= f.text_field :confimer, class:"form-control" %></td>
+        </tr>
+      </table>
+
+      <% unless @farmer.guest? %>
+        <div class="mt-5 d-flex justify-content-center">
           <%= f.submit '変更を保存', class: "btn btn-success" %>
-        <% else %>
-          <p>ゲストユーザーのため作成や編集が行えません。</p>
-        <% end %>
+        </div>
+        <div class="pt-4 mt-5 d-flex justify-content-end">
+          <%= link_to '削除', farmer_record_path(@record.id), method: :delete, "data-confirm" => "本当に削除しますか？", class:"btn btn-danger" %>
+        </div>
+      <% else %>
+        <p>ゲストユーザーのため作成や編集が行えません。</p>
       <% end %>
-    </div>
-    <div class="col">
-      <div class="d-flex justify-content-center"><%= link_to '削除', farmer_record_path(@record.id), method: :delete, "data-confirm" => "本当に削除しますか？", class:"btn btn-danger" %></div>
-    </div>
+    <% end %>
   </div>
 </div>

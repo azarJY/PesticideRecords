@@ -1,17 +1,40 @@
-<%= render 'layouts/calculator', farmer: @farmer %>
-<%= form_with model: @season, local: true, url: farmer_seasons_path(@farmer, @season), method: :post do |form| %>
-  <div class="form-group">
-    <%= form.label :start_date, "栽培シーズン開始日" %>
-    <%= form.text_field :start_date, class: 'form-control flatpickr', data: {enable_time: false} %>
-  </div>
+<div class="row pt-3">
+  <%= render 'layouts/calculator', farmer: @farmer %>
+  <div class="col-md-1"></div>
+  <div class="col-md-7">
+    <h1 class="d-flex justify-content-center"><i class="fa-solid fa-calendar-days"></i>シーズン時期設定画面 <i class="fa-solid fa-calendar-days"></i></h1>
+    <%= form_with model: @season, local: true, url: farmer_seasons_path(@farmer, @season), method: :post do |form| %>
+    <table class="mt-4 table">
+      <div class="form-group">
+        <tr>
+          <th class="thead-dark">
+            <%= form.label :start_date, "栽培シーズン開始日" %>
+          </th>
+          <td>
+            <%= form.text_field :start_date, class: 'form-control flatpickr', data: {enable_time: false} %>
+          </td>
+        </tr>
+      </div>
 
-  <div class="form-group">
-    <%= form.label :end_date, "栽培シーズン終了日" %>
-    <%= form.text_field :end_date, class: 'form-control flatpickr', data: {enable_time: false} %>
-  </div>
-  <% unless @farmer.guest? %>
-    <%= form.submit "シーズン時期設定", class: "btn btn-primary" %>
-  <% else %>
-    <p>ゲストユーザーのためシーズン登録が行えません。</p>
+      <div class="form-group">
+        <tr>
+          <th class="thead-dark">
+            <%= form.label :end_date, "栽培シーズン終了日" %>
+          </th>
+          <td>
+            <%= form.text_field :end_date, class: 'form-control flatpickr', data: {enable_time: false} %>
+          </td>
+        </tr>
+      </div>
+
+    </table>
+    <% unless @farmer.guest? %>
+      <div class="pt-4 d-flex justify-content-center">
+        <%= form.submit "シーズン時期設定", class: "btn btn-success" %>
+      </div>
+    <% else %>
+      <p>ゲストユーザーのためシーズン登録が行えません。</p>
+    <% end %>
   <% end %>
-<% end %>
+  </div>
+</div>

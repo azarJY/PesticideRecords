@@ -1,49 +1,42 @@
-<div class="container">
-  <% if @pesticide.errors.any? %>
-    <%= @pesticide.errors.count %>件のエラーが発生しました
-    <ul>
-      <% @pesticide.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  <% end %>
+<div class="row pt-3">
   <%= render 'layouts/calculator', farmer: @farmer %>
-  <div class="row">
-    <div class="col">
-      <h2>使用農薬新規登録</h2>
-      <%= form_with model: @pesticide, url: farmer_pesticides_path(@farmer, @pesticide) do |f| %>
-        <table class="table">
-          <tr>
-            <th scope="col">農薬名</th>
-            <td><%= f.text_field :name %></td>
-          </tr>
-          <tr>
-            <th scope="col">RACコード</th>
-            <td><%= f.text_field :code %></td>
-          </tr>
-          <tr>
-            <th scope="col">適用病害虫</th>
-            <td><%= f.text_area :subject %></td>
-          </tr>
-          <tr>
-            <th scope="col">使用方法</th>
-            <td><%= f.text_field :use_method %></td>
-          </tr>
-          <tr>
-            <th scope="col">希釈量</th>
-            <td><%= f.text_field :magnification %></td>
-          </tr>
-          <tr>
-            <th scope="col">使用可能回数</th>
-            <td><%= f.text_field :usable_number %></td>
-          </tr>
-        </table>
-        <% unless @farmer.guest? %>
+  <div class="col-md-1"></div>
+  <div class="col-md-7">
+    <h1 class="pb-5 d-flex justify-content-center">使用農薬新規登録</h1>
+    <%= form_with model: @pesticide, url: farmer_pesticides_path(@farmer, @pesticide) do |f| %>
+      <table class="table">
+        <tr>
+          <th scope="col">農薬名</th>
+          <td><%= f.text_field :name, class:"form-control" %></td>
+        </tr>
+        <tr>
+          <th scope="col">RACコード</th>
+          <td><%= f.text_field :code, class:"form-control" %></td>
+        </tr>
+        <tr>
+          <th scope="col">適用病害虫</th>
+          <td><%= f.text_area :subject, class:"form-control" %></td>
+        </tr>
+        <tr>
+          <th scope="col">使用方法</th>
+          <td><%= f.text_field :use_method, class:"form-control" %></td>
+        </tr>
+        <tr>
+          <th scope="col">希釈量</th>
+          <td><%= f.text_field :magnification, class:"form-control" %></td>
+        </tr>
+        <tr>
+          <th scope="col">使用可能回数</th>
+          <td><%= f.text_field :usable_number, class:"form-control" %></td>
+        </tr>
+      </table>
+      <% unless @farmer.guest? %>
+        <div class="pt-4 d-flex justify-content-center">
           <%= f.submit '新規登録', "data-confirm" => "登録したデータは編集できません！作成してよろしいですか？？",   class: "btn btn-success" %>
-        <% else %>
-          <p>ゲストユーザーのため作成や編集が行えません。</p>
-        <% end %>
+        </div>
+      <% else %>
+        <p>ゲストユーザーのため作成や編集が行えません。</p>
       <% end %>
-    </div>
+    <% end %>
   </div>
 </div>

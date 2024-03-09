@@ -1,51 +1,42 @@
-<div class="container">
-  <%= render 'layouts/calculator', farmer: @farmer %>
-  <div class="row justify-content-center">
-    <div class="col">
-      <h1>登録済農薬一覧</h1>
-      <h2 class="text-info"><%= link_to "農薬新規登録", new_farmer_pesticide_path, class:"btn btn-success" %></h2>
-      <table class="table">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">農薬</th>
-            <th scope="col">RAC</th>
-            <th scope="col">適用病害虫</th>
-            <th scope="col">直近薬散記録(1件)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @pesticides.each do |pesticide| %>
-            <tr>
-              <td>
-                <%= link_to farmer_pesticide_path(pesticide) do %>
-                  <%= pesticide.name %>
-                <% end %>
-              </td>
-              <td><%= pesticide.code %></td>
-              <td><%= pesticide.subject %></td>
-              <td>
-                <% if pesticide.records.any? %>
-                  <% latest_record = pesticide.records.order(day: :desc).first %>
-                  <%= link_to farmer_record_path(latest_record) do %>
-                    <%= latest_record.day %> <%= latest_record.land %>
-                  <% end %>
-                <% else %>
-                  <p>使用記録　無し</p>
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-        <tfooter></tfooter>
-      </table>
-    </div>
-  </div>
-</div>
-
 <div class="row pt-3">
   <%= render 'layouts/calculator', farmer: @farmer %>
   <div class="col-md-1"></div>
   <div class="col-md-7">
-    
+    <h1 class="d-flex justify-content-center">登録済農薬一覧</h1>
+    <h2 class="pt-4 d-flex justify-content-end"><%= link_to "農薬新規登録", new_farmer_pesticide_path, class:"btn btn-secondary" %></h2>
+    <table class="mt-4 table texit-center">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">農薬</th>
+          <th scope="col">RAC</th>
+          <th scope="col">適用病害虫</th>
+          <th scope="col">直近薬散記録(1件)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @pesticides.each do |pesticide| %>
+          <tr>
+            <td>
+              <%= link_to farmer_pesticide_path(pesticide), class:"text-warning" do %>
+                <%= pesticide.name %>
+              <% end %>
+            </td>
+            <td><%= pesticide.code %></td>
+            <td><%= pesticide.subject %></td>
+            <td>
+              <% if pesticide.records.any? %>
+                <% latest_record = pesticide.records.order(day: :desc).first %>
+                <%= link_to farmer_record_path(latest_record),  class:"text-success" do %>
+                  <%= latest_record.day %> <%= latest_record.land %>
+                <% end %>
+              <% else %>
+                <p>使用記録　無し</p>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+      <tfooter></tfooter>
+    </table>
   </div>
 </div>

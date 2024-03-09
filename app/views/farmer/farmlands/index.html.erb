@@ -1,10 +1,10 @@
-<div class="container">
+<div class="row pt-3">
   <%= render 'layouts/calculator', farmer: @farmer %>
-  <div class="row justify-content-center">
-    <div class="col">
-      <h1>登録済栽培区画一覧</h1>
-      <h2 class="text-info"><%= link_to "栽培区画新規登録", new_farmer_farmland_path, class:"btn btn-success" %></h2>
-      <table class="table">
+  <div class="col-md-1"></div>
+  <div class="col-md-7">
+    <h1 class="d-flex justify-content-center">登録済栽培区画一覧</h1>
+    <h2 class="pt-4 d-flex justify-content-end"><%= link_to "栽培区画新規登録", new_farmer_farmland_path, class:"btn btn-secondary" %></h2>
+    <table class="mt-4 table text-center">
         <thead class="thead-dark">
           <tr>
             <th scope="col">栽培区画</th>
@@ -15,16 +15,18 @@
           <% @farmlands.each do |farmland| %>
             <tr>
               <td>
-                <%= link_to farmer_farmland_path(farmland) do %>
+                <%= link_to farmer_farmland_path(farmland), class:"text-info" do %>
                   <%= farmland.land %>
                 <% end %>
               </td>
               <td>
                 <% if farmland.records.any? %>
                   <% latest_record = farmland.records.order(day: :desc).first %>
-                  <%= link_to farmer_record_path(latest_record) do %>
-                    <%= latest_record.day %> <%= latest_record.name %>
-                  <% end %>
+                  <strong>
+                    <%= link_to farmer_record_path(latest_record), class:"text-success" do %>
+                      <%= latest_record.day %> <%= latest_record.name %>
+                    <% end %>
+                  </strong>
                 <% else %>
                   <p>使用記録　無し</p>
                 <% end %>
@@ -34,14 +36,5 @@
         </tbody>
         <tfooter></tfooter>
       </table>
-    </div>
-  </div>
-</div>
-
-<div class="row pt-3">
-  <%= render 'layouts/calculator', farmer: @farmer %>
-  <div class="col-md-1"></div>
-  <div class="col-md-7">
-    
   </div>
 </div>

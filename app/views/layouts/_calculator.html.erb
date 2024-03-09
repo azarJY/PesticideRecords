@@ -1,14 +1,14 @@
-    <div class="col-md-4">
+    <div class="col-md-4 border-right">
       <div class="sidebar">
-        <h2 class="custom-font">農薬希釈計算機 <i class="fa-sharp fa-solid fa-calculator"></i></h2>
+        <h2>農薬希釈計算機 <i class="fa-sharp fa-solid fa-calculator"></i></h2>
         
         <div class="form-group">
-          <label for="dilution_ratio" class="form-label custom-font"><i class="fa-solid fa-droplet"></i> 水量(L)</i></label>
+          <label for="dilution_ratio" class="form-label"><i class="fa-solid fa-droplet"></i> 水量(L)</i></label>
           <input type="number" id="dilution_ratio" class="form-control form-control-lg">
         </div>
       
         <div class="form-group">
-          <label for="water_volume" class="form-label custom-font"><i class="fa-solid fa-prescription-bottle"></i> 希釈倍率</label>
+          <label for="water_volume" class="form-label"><i class="fa-solid fa-prescription-bottle"></i> 希釈倍率</label>
           <input type="number" id="water_volume" class="form-control form-control-lg">
         </div>
       
@@ -16,9 +16,10 @@
         
         <p class="custom-font mt-3">栽培作物　：<%= farmer.crop %></p>
         <p class="custom-font">管理者　：<%= farmer.last_name %> <%= farmer.first_name %></p>
+        <%= link_to 'シーズン時期設定', new_farmer_season_path, class:"btn btn-dark btn-lg mt-3" %>
         <%= link_to '栽培区画新規登録', new_farmer_farmland_path, class:"text-info btn btn-dark btn-lg mt-3" %>
         <%= link_to '使用農薬新規登録', new_farmer_pesticide_path, class:"text-warning btn btn-dark btn-lg mt-3" %>
-        <%= link_to '使用記録新規作成', new_farmer_record_path, class:"btn btn-dark btn-lg mt-5" %>
+        <%= link_to '使用記録新規作成', new_farmer_record_path, class:"text-success btn btn-dark btn-lg mt-5" %>
       </div>
     </div>    
     
@@ -41,10 +42,12 @@
     </script>
     
     <!--共通レイアウトBoostrapベース-->
-    <!-- <div class="row pt-3">
+    <!--
+<div class="row pt-3">
   < %= render 'layouts/calculator', farmer: @farmer %>
   <div class="col-md-1"></div>
   <div class="col-md-7">
-    
+    <h1 class="d-flex justify-content-center">見出し</h1>
   </div>
-</div>-->
+</div>
+-->

@@ -1,22 +1,10 @@
-<div class="container pt-5">
-    <% if @record.errors.any? %>
-    <%= @record.errors.count %>件のエラーが発生しました
-    <ul>
-      <% @record.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-    <% end %>
+<div class="row pt-3">
   <%= render 'layouts/calculator', farmer: @farmer %>
-
-  <div class="row pt-3">
-    <div class="col-2"></div>
-    <div class="col-2"><h1>使用記録新規作成情報確認</h1></div>
-    <div class="col-8"></div>
-  </div>
-
-  <div class="row pt-3">
-    <table class="table">
+  <div class="col-md-1"></div>
+  <div class="col-md-7">
+    <h1 class="d-flex justify-content-center">使用記録新規作成情報確認</h1>
+    
+    <table class="mt-4 table text-center">
       <tr><th>日付</th><td><%= @record.day %></td></tr>
       <tr><th>使用農薬</th><td><%= @record.name %></td></tr>
       <tr><th>適用病害虫</th><td><%= @record.subject %></td></tr>
@@ -27,7 +15,6 @@
       <tr><th>散布車</th><td><%= @record.user %></td></tr>
       <tr><th>確認者</th><td><%= @record.confimer %></td></tr>
     </table>
-  </div>
 
     <div class="pt-5 d-flex justify-content-center">
       <%= form_with model: @record, url: farmer_records_path(@farmer, @record), method: :post do |f| %>
@@ -50,4 +37,5 @@
         <% end %>
       <% end %>
     </div>
+  </div>
 </div>

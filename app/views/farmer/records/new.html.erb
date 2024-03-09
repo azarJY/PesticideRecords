@@ -1,60 +1,56 @@
-<div class="container">
-  <% if @record.errors.any? %>
-    <%= @record.errors.count %>件のエラーが発生しました
-    <ul>
-      <% @record.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  <% end %>
+<div class="row pt-3">
   <%= render 'layouts/calculator', farmer: @farmer %>
-  <div class="row">
-    <div class="col">
-      <h2>使用記録新規作成</h2>
+  <div class="col-md-1"></div>
+  <div class="col-md-7">
+    <h1 class="d-flex justify-content-center">使用記録新規作成</h1>
       <%= form_with model: @record, url: farmer_records_confirm_path, method: :post do |f| %>
-        <table class="table">
-          <tr>
-            <th scope="col">日付</th>
-            <td>
-              <%= f.text_field :day, class: 'form-control flatpickr', data: {enable_time: false} %>
-            </td>
-          </tr>
-          <tr>
-            <th scope="col">農薬名</th>
-            <td>
+      <table class="mt-4 table text-center">
+        <tr>
+          <th scope="col">日付</th>
+          <td>
+            <%= f.text_field :day, class: 'form-control flatpickr', placeholder: 'クリックしてカレンダーを表示', data: {enable_time: false} %>
+          </td>
+        </tr>
+        <tr>
+          <th scope="col">農薬名</th>
+          <td>
+            <div class="form-group">
               <%= f.select :pesticide_id, options_from_collection_for_select(current_farmer.pesticides, :id, :name) %>
-            </td>
-          </tr>
-          <tr>
-            <th scope="col">散布区画</th>
-            <td>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th scope="col">散布区画</th>
+          <td>
+            <div class="form-group">
               <%= f.select :farmland_id, options_from_collection_for_select(current_farmer.farmlands, :id, :land) %>
-            </td>
-          </tr>
-          <tr>
-            <th scope="col">使用量(単位も入力)</th>
-            <td><%= f.text_field :amount %></td>
-          </tr>
-          <tr>
-            <th scope="col">原水(単位も入力)</th>
-            <td><%= f.text_field :water %></td>
-          </tr>
-          <tr>
-            <th scope="col">散布者</th>
-            <td><%= f.text_field :user %></td>
-          </tr>
-          <tr>
-            <th scope="col">確認者</th>
-            <td><%= f.text_field :confimer %></td>
-          </tr>
-
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th scope="col">使用量(単位も入力)</th>
+          <td><%= f.text_field :amount, class:"form-control" %></td>
+        </tr>
+        <tr>
+          <th scope="col">原水(単位も入力)</th>
+          <td><%= f.text_field :water, class:"form-control" %></td>
+        </tr>
+        <tr>
+          <th scope="col">散布者</th>
+          <td><%= f.text_field :user, class:"form-control" %></td>
+        </tr>
+        <tr>
+          <th scope="col">確認者</th>
+          <td><%= f.text_field :confimer, class:"form-control" %></td>
+        </tr>
         </table>
-        <% unless @farmer.guest? %>
-          <%= f.submit '確認ページへ移行', class: "btn btn-success" %>
-        <% else %>
-          <p>ゲストユーザーのため作成や編集が行えません。</p>
-        <% end %>
+      <% unless @farmer.guest? %>
+        <div class="pt-4 d-flex justify-content-center">
+          <%= f.submit '確認ページへ移行', class: "btn btn-primary" %>
+        </div>
+      <% else %>
+        <p>ゲストユーザーのため作成や編集は行えません。</p>
       <% end %>
-    </div>
+    <% end %>
   </div>
 </div>

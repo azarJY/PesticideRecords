@@ -1,36 +1,37 @@
-<div class="container">
+<div class="row pt-3">
   <%= render 'layouts/calculator', farmer: @farmer %>
-  <div class="row justify-content-center">
-    <div class="col">
-      <h1>農薬使用記録一覧</h1>
-      <h2 class="text-info"><%= link_to "使用記録新規作成", new_farmer_record_path, class: "btn btn-success" %></h2>
-      <table class="table">
-        <thead class="thead-dark">
+  <div class="col-md-1"></div>
+  <div class="col-md-7">
+    <h1 class="d-flex justify-content-center">農薬使用記録一覧</h1>
+    <div class="pt-4 d-flex justify-content-end"><%= link_to "使用記録新規作成", new_farmer_record_path, class: "btn btn-secondary" %></div>
+    
+    <table class="mt-4 table text-center">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">日付</th>
+          <th scope="col">使用農薬</th>
+          <th scope="col">散布区画</th>
+          <th scope="col">使用量</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @records.each do |record| %>
           <tr>
-            <th scope="col">日付</th>
-            <th scope="col">使用農薬</th>
-            <th scope="col">散布区画</th>
-            <th scope="col">使用量</th>
+            <td>
+              <%= link_to farmer_record_path(record), class:"text-success"  do %>
+                <%= record.day %>
+              <% end %>
+            </td>
+            <td>
+              <%= record.name %>
+            </td>
+              <td><%= record.land %></td>
+            <td><%= record.amount %></td>
           </tr>
-        </thead>
-        <tbody>
-            <% @records.each do |record| %>
-                <tr>
-                  <td>
-                    <%= link_to farmer_record_path(record) do %>
-                      <%= record.day %>
-                    <% end %>
-                  </td>
-                  <td>
-                    <%= record.name %>
-                  </td>
-                    <td><%= record.land %></td>
-                  <td><%= record.amount %></td>
-                </tr>
-            <% end %>
-        </tbody>
-        <tfooter></tfooter>
-      </table>
-    </div>
+        <% end %>
+      </tbody>
+      <tfooter></tfooter>
+    </table>
+    
   </div>
 </div>

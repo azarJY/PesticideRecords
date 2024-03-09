@@ -1,62 +1,54 @@
-<div class="container">
-  <%= render 'layouts/calculator', farmer: @farmer %>
-  <div class="row">
-    <div class="col-4">
-      <h2><%= @farmland.land %> 詳細</h2>
-    </div>
-    <div class="col-2">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>栽培面積</th>
-            <th>概要</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><%= @farmland.area %></td>
-            <td><%= @farmland.overview %></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="col-6">
-      <h1><%= @farmland.land %>農薬使用記録一覧</h1>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>日付</th>
-            <th>使用農薬</th>
-            <th>使用量</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @farmland.records.each do |record| %>
-          <tr>
-            <td>
-              <%= link_to farmer_record_path(record) do %>
-                <%= record.day %>
-              <% end %>
-            </td>
-            <td><%= record.name %></td>
-            <td><%= record.amount %></td>
-          </tr>
-          <% end %>
-        </tbody>
-        <% unless @farmer.guest? %>
-          <%= link_to '栽培区画削除', farmer_farmland_path(@farmland.id), method: :delete, "data-confirm" => "本当に削除しますか？",  class: "btn btn-danger" %>
-        <% else %>
-          <p>ゲストユーザーのため作成や編集が行えません。</p>
-        <% end %>
-    </table>
-    </div>
-  </div>
-</div>
-
 <div class="row pt-3">
   <%= render 'layouts/calculator', farmer: @farmer %>
-  <div class="col-md-1"></div>
-  <div class="col-md-7">
+  <div class="col-md-8">
+    <h1 class="d-flex justify-content-center"><%= @farmland.land %> 詳細</h1>
     
+    <table class="mt-4 table text-center">
+      <thead class="thead-dark">
+        <tr>
+          <th class="col-2">栽培面積</th>
+          <th>概要</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= @farmland.area %></td>
+          <td><%= @farmland.overview %></td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <h1 class="mt-5 d-flex justify-content-center"><%= @farmland.land %>農薬使用記録一覧</h1>
+    <table class="mt-4 table text-center">
+      <thead class="thead-dark">
+        <tr>
+          <th>日付</th>
+          <th>使用農薬</th>
+          <th>使用量</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @farmland.records.each do |record| %>
+        <tr>
+          <td>
+            <strong>
+              <%= link_to farmer_record_path(record), class:"text-success" do %>
+                <%= record.day %>
+              <% end %>
+            </strong>
+          </td>
+          <td><%= record.name %></td>
+          <td><%= record.amount %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <% unless @farmer.guest? %>
+      <div class="pt-4 mt-5 d-flex justify-content-end">
+        <%= link_to '栽培区画削除', farmer_farmland_path(@farmland.id), method: :delete, "data-confirm" => "本当に削除しますか？",  class: "btn btn-danger" %>
+      </div>
+    <% else %>
+      <p>ゲストユーザーのため作成や編集が行えません。</p>
+    <% end %>
   </div>
 </div>
