@@ -40,6 +40,7 @@
 ### 開発環境
 - OS：Linux(CentOS)
 - 言語：HTML,CSS,JavaScript,Ruby,SQ
+- 仮想サーバ：EC2
 - レイアウト調整：Boostrap
 - フレームワーク：Ruby on Rails
 - JSライブラリ：jQuery
@@ -47,6 +48,6 @@
 
 ### 使用素材
 
-ヘッダー写真→自身が撮影したもの
+ヘッダー写真→自身が撮影
 Google Fontよりフォント素材「Yuji Boku」
 Fontawesome.comより各種アイコン

@@ -39,7 +39,9 @@ class Farmer::PesticidesController < ApplicationController
     @farmlands_with_records = @records_within_season.map(&:farmland).uniq
     @usage_counts = {}
     @farmlands_with_records.each do |farmland|
-      @usage_counts[farmland.land] = @records_within_season.where(farmland: farmland).count
+      if farmland.present?
+        @usage_counts[farmland.land] = @records_within_season.where(farmland: farmland).count
+      end
     end
   end
 

@@ -12,8 +12,11 @@ class Farmer::CurrentFarmersController < ApplicationController
   
   def update
     @farmer = Farmer.find(current_farmer.id)
-    @farmer.update(farmer_params)
-    redirect_to farmer_current_farmer_path
+    if @farmer.update(farmer_params)
+       redirect_to farmer_current_farmer_path
+    else
+      render :edit
+    end
   end
   
   def confirm

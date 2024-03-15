@@ -2,7 +2,7 @@
   <%= render 'layouts/calculator', farmer: @farmer %>
   <div class="col-md-8">
     <h1 class="d-flex justify-content-center"><%= @pesticide.name %> 詳細</h1>
-    
+
     <table class="mt-4 table text-center">
       <thead class="thead-dark">
         <tr>
@@ -23,7 +23,7 @@
         </tr>
       </tbody>
     </table>
-    
+
     <h1 class="mt-5 d-flex justify-content-center">各栽培区画使用回数一覧</h1>
     <h3 class="d-flex justify-content-center">使用可能回数 <%= @pesticide.usable_number %></h3>
     <div class="pt-4 d-flex justify-content-end">
@@ -45,20 +45,22 @@
       </thead>
       <tbody>
         <% @farmlands.each do |farmland| %>
-          <tr>
-            <td><%= farmland.land %></td>
-            <td>
-              <% if @usage_counts[farmland.land] %>
-                <%= @usage_counts[farmland.land] %>
-              <% else %>
-                0
-              <% end %>
-            </td>
-          </tr>
+          <% if farmland.present? %>
+            <tr>
+              <td><%= farmland.land %></td>
+              <td>
+                <% if @usage_counts[farmland.land] %>
+                  <%= @usage_counts[farmland.land] %>
+                <% else %>
+                  0
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
         <% end %>
       </tbody>
     </table>
-    
+
     <h1 class="mt-5 d-flex justify-content-center"><%= @pesticide.name %>農薬使用記録一覧</h1>
     <table class="mt-4 table text-center">
       <thead class="thead-dark">
@@ -89,6 +91,6 @@
       <% else %>
         <p>ゲストユーザーのため作成や編集が行えません。</p>
       <% end %>
-    
+
   </div>
 </div>

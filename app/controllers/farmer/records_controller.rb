@@ -60,9 +60,14 @@ class Farmer::RecordsController < ApplicationController
 
   def update
     @farmer = Farmer.find(current_farmer.id)
-    record = current_farmer.records.find(params[:id])
-    record.update(record_params)
-    redirect_to farmer_records_path
+    @record = current_farmer.records.find(params[:id])
+    if @record.update(record_params)
+      flash[:notice] = "農薬使用記録の編集に成功しました。"
+      redirect_to farmer_records_path
+    else
+      flash[:notice] = "農薬使用記録の編集に失敗しました。"
+      render :edit
+    end
   end
 
   def destroy
