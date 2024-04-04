@@ -35,7 +35,8 @@
 
 ### 設計書
 
-後ほど作成予定
+![PF-noukouインフラ設計図](https://github.com/azarJY/PesticideRecords/assets/143927567/20fc6f84-69a2-4fb6-9d45-b3a8211de112)
+
 
 ### 開発環境
 - OS：Linux(CentOS)
