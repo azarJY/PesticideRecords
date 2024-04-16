@@ -1,15 +1,30 @@
 # ゲストログイン用アカウント
-guest_user = Farmer.find_or_initialize_by(email: "noukou@gmail.com")
-guest_user.assign_attributes(
-  password: "156464",
-  last_name: "見本",
-  first_name: "太郎",
-  last_name_kana: "ミホン",
-  first_name_kana: "タロウ",
-  farm_name: "サンプル農場",
-  crop: "夏おとめ",
-)
-guest_user.save!
+# 既存のゲストユーザーを特定して更新する
+guest_user = Farmer.find_by(email: "noukou@gmail.com")
+if guest_user
+  guest_user.update(
+    password: "156464",
+    last_name: "見本",
+    first_name: "太郎",
+    last_name_kana: "ミホン",
+    first_name_kana: "タロウ",
+    farm_name: "サンプル農場",
+    crop: "夏おとめ",
+  )
+else
+  # 存在しない場合は新しいユーザーを作成する
+  Farmer.create!(
+    email: "noukou@gmail.com",
+    password: "156464",
+    last_name: "見本",
+    first_name: "太郎",
+    last_name_kana: "ミホン",
+    first_name_kana: "タロウ",
+    farm_name: "サンプル農場",
+    crop: "夏おとめ",
+  )
+end
+
 
 
 
