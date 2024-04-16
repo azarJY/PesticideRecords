@@ -1,3 +1,5 @@
+Farmer.destroy_all
+
 # ゲストログイン用アカウント
 guest_user = Farmer.new(
   email: "noukou@gmail.com",
@@ -11,6 +13,110 @@ guest_user = Farmer.new(
   crop: "夏おとめ",
 )
 guest_user.save!
+
+
+Farmland.create!(
+  farmer_id: guest_user.id,
+  land: "単棟ハウスA",
+  area: "50m×4",
+  overview: "説明を記入 例:冷熱設備有イチゴ用",
+)
+
+Farmland.create!(
+  farmer_id: guest_user.id,
+  land: "単棟ハウスB",
+  area: "50m×4",
+  overview: "説明を記入 例:冷熱設備有イチゴ用",
+)
+
+Pesticide.create!(
+  farmer_id: guest_user.id,
+  name: "農薬1",
+  code: "殺虫5",
+  subject: "アザミウマ・ハダニ",
+  use_method: "希釈散布",
+  magnification: "2000倍",
+  usable_number: 3,
+)
+
+Pesticide.create!(
+  farmer_id: guest_user.id,
+  name: "農薬2",
+  code: "無し",
+  subject: "うどんこ病",
+  use_method: "希釈散布",
+  magnification: "2000倍",
+  usable_number: 10,
+)
+
+Record.create!(
+  farmer_id: guest_user.id,
+  farmland_id: Farmland.first.id,
+  pesticide_id: Pesticide.first.id,
+  day: Date.new(2024, 4, 1),
+  name: "農薬1",
+  subject: "アザミウマ・ハダニ",
+  code: "殺虫5",
+  land: "単棟ハウスA",
+  amount: "250ml",
+  water: "500L",
+  user: "サンプルユーザー",
+  confimer: "サンプル承認者",
+)
+
+Record.create!(
+  farmer_id: guest_user.id,
+  farmland_id: Farmland.last.id,
+  pesticide_id: Pesticide.first.id,
+  day: Date.new(2024, 4, 1),
+  name: "農薬1",
+  subject: "アザミウマ・ハダニ",
+  code: "殺虫5",
+  land: "単棟ハウスB",
+  amount: "250ml",
+  water: "500L",
+  user: "サンプルユーザー",
+  confimer: "サンプル承認者",
+)
+
+Record.create!(
+  farmer_id: guest_user.id,
+  farmland_id: Farmland.first.id,
+  pesticide_id: Pesticide.first.id,
+  day: Date.new(2024, 4, 5),
+  name: "農薬1",
+  subject: "アザミウマ・ハダニ",
+  code: "殺虫5",
+  land: "単棟ハウスA",
+  amount: "250ml",
+  water: "500L",
+  user: "サンプルユーザー",
+  confimer: "サンプル承認者",
+)
+
+Record.create!(
+  farmer_id: guest_user.id,
+  farmland_id: Farmland.first.id,
+  pesticide_id: Pesticide.first.id,
+  day: Date.new(2025, 1, 1),
+  name: "農薬1",
+  subject: "アザミウマ・ハダニ",
+  code: "殺虫5",
+  land: "単棟ハウスA",
+  amount: "250ml",
+  water: "500L",
+  user: "サンプルユーザー",
+  confimer: "サンプル承認者",
+)
+
+Season.create!(
+  farmer_id: guest_user.id,
+  start_date: Date.new(2024, 4, 1),
+  end_date: Date.new(2024, 12, 31),
+)
+
+
+
 
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
