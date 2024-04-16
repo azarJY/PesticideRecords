@@ -1,10 +1,7 @@
-Farmer.destroy_all
-
 # ゲストログイン用アカウント
-guest_user = Farmer.new(
-  email: "noukou@gmail.com",
+guest_user = Farmer.find_or_initialize_by(email: "noukou@gmail.com")
+guest_user.assign_attributes(
   password: "156464",
-  password_confirmation: "156464",
   last_name: "見本",
   first_name: "太郎",
   last_name_kana: "ミホン",
@@ -13,6 +10,7 @@ guest_user = Farmer.new(
   crop: "夏おとめ",
 )
 guest_user.save!
+
 
 
 Farmland.create!(
