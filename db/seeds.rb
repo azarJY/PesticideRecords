@@ -25,9 +25,6 @@ else
   )
 end
 
-
-
-
 Farmland.create!(
   farmer_id: guest_user.id,
   land: "単棟ハウスA",
@@ -38,6 +35,13 @@ Farmland.create!(
 Farmland.create!(
   farmer_id: guest_user.id,
   land: "単棟ハウスB",
+  area: "50m×4",
+  overview: "説明を記入 例:冷熱設備有イチゴ用",
+)
+
+Farmland.create!(
+  farmer_id: guest_user.id,
+  land: "単棟ハウスC",
   area: "50m×4",
   overview: "説明を記入 例:冷熱設備有イチゴ用",
 )
