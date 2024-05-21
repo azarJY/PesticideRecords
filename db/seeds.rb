@@ -1,15 +1,20 @@
 # ゲストログイン用アカウント
 guest_user = Farmer.find_or_initialize_by(email: "noukou@gmail.com")
 
-guest_user.update!(
-  password: "156464",
-  last_name: "見本",
-  first_name: "太郎",
-  last_name_kana: "ミホン",
-  first_name_kana: "タロウ",
-  farm_name: "サンプル農場",
-  crop: "夏おとめ"
-)
+if guest_user.new_record?
+  guest_user.assign_attributes(
+    password: "156464",
+    last_name: "見本",
+    first_name: "太郎",
+    last_name_kana: "ミホン",
+    first_name_kana: "タロウ",
+    farm_name: "サンプル農場",
+    crop: "夏おとめ"
+  )
+  guest_user.save!
+else
+
+end
 
 farmland_a = Farmland.create!(
   farmer_id: guest_user.id,
