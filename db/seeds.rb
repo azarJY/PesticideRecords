@@ -1,30 +1,16 @@
 # ゲストログイン用アカウント
-# 既存のゲストユーザーを特定して更新する
-guest_user = Farmer.find_by(email: "noukou@gmail.com")
-unless guest_user
-  guest_user = Farmer.create!(
-    email: "noukou@gmail.com",
-    password: "156464",
-    last_name: "見本",
-    first_name: "太郎",
-    last_name_kana: "ミホン",
-    first_name_kana: "タロウ",
-    farm_name: "サンプル農場",
-    crop: "夏おとめ"
-  )
-else
-  guest_user.update!(
-    password: "156464",
-    last_name: "見本",
-    first_name: "太郎",
-    last_name_kana: "ミホン",
-    first_name_kana: "タロウ",
-    farm_name: "サンプル農場",
-    crop: "夏おとめ"
-  )
-end
+guest_user = Farmer.find_or_initialize_by(email: "noukou@gmail.com")
 
-# Farmlandの作成
+guest_user.update!(
+  password: "156464",
+  last_name: "見本",
+  first_name: "太郎",
+  last_name_kana: "ミホン",
+  first_name_kana: "タロウ",
+  farm_name: "サンプル農場",
+  crop: "夏おとめ"
+)
+
 farmland_a = Farmland.create!(
   farmer_id: guest_user.id,
   land: "単棟ハウスA",
@@ -46,7 +32,6 @@ farmland_c = Farmland.create!(
   overview: "説明を記入 例:冷熱設備有イチゴ用"
 )
 
-# Pesticideの作成
 pesticide_1 = Pesticide.create!(
   farmer_id: guest_user.id,
   name: "農薬1",
@@ -67,7 +52,6 @@ pesticide_2 = Pesticide.create!(
   usable_number: 10
 )
 
-# Recordの作成
 Record.create!(
   farmer_id: guest_user.id,
   farmland_id: farmland_a.id,
@@ -133,10 +117,6 @@ Season.create!(
   start_date: Date.new(2024, 4, 1),
   end_date: Date.new(2024, 12, 31)
 )
-
-
-
-
 
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
