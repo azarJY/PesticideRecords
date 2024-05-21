@@ -13,7 +13,7 @@ unless guest_user
     crop: "夏おとめ"
   )
 else
-  guest_user.update(
+  guest_user.update!(
     password: "156464",
     last_name: "見本",
     first_name: "太郎",
